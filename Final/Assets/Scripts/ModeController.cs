@@ -1,32 +1,40 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ModeController : MonoBehaviour
 {
-    private string mode; // string cus idk how to define enums outside this script
+    enum MODE { EDIT, TEST, PLAY };
+
+    public Text modeText;
+
+    private MODE mode;
 
     // Start is called before the first frame update
     void Start()
     {
-        mode = "EDIT";
+        mode = MODE.EDIT;
+        modeText.text = mode.ToString();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void ChangeMode()
     {
-        if (mode == "EDIT") mode = "TEST";
-        else if (mode == "TEST") mode = "PLAY";
-        else mode = "EDIT";
+        if (mode == MODE.EDIT) mode = MODE.TEST;
+        else if (mode == MODE.TEST) mode = MODE.PLAY;
+        else mode = MODE.EDIT;
+
+        modeText.text = mode.ToString();
     }
 
     public string GetMode()
     {
-        return mode;
+        return mode.ToString();
     }
 }

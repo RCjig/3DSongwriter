@@ -31,5 +31,6 @@ public class NoteGateController : MonoBehaviour
     private void OnLineTrigger()
     {
         // play notes
+        // Debug.Log(this.name + "crossed\n"); // this works
     }
 }

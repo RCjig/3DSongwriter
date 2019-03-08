@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4635779871770201465}
   - component: {fileID: 2007000496811018262}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: TriggerLine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -317,7 +317,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3161278545647166910}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Top
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1173,7 +1173,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3161278546543595771}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1939,7 +1939,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3161278547131000325}
   - component: {fileID: 8400394760659632556}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: NoteGate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2167,7 +2167,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3161278547443629383}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
