@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class ModeController : MonoBehaviour
 {
-    enum MODE { EDIT, TEST, PLAY };
+    enum MODE { CREATE, EDIT, PLAY };
 
     public Text modeText;
 
@@ -14,8 +14,9 @@ public class ModeController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        mode = MODE.EDIT;
+        mode = MODE.EDIT; // change to CREATE later
         modeText.text = mode.ToString();
+        modeText.color = Color.green;
     }
 
     // Update is called once per frame
@@ -26,9 +27,21 @@ public class ModeController : MonoBehaviour
 
     public void ChangeMode()
     {
-        if (mode == MODE.EDIT) mode = MODE.TEST;
-        else if (mode == MODE.TEST) mode = MODE.PLAY;
-        else mode = MODE.EDIT;
+        if (mode == MODE.CREATE)
+        {
+            mode = MODE.EDIT;
+            modeText.color = Color.green;
+        }
+        else if (mode == MODE.EDIT)
+        {
+            mode = MODE.PLAY;
+            modeText.color = Color.red;
+        }
+        else
+        {
+            mode = MODE.CREATE;
+            modeText.color = Color.white;
+        }
 
         modeText.text = mode.ToString();
     }

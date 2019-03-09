@@ -8,7 +8,6 @@ public class RayCastController : MonoBehaviour
 
     private OvrAvatar avatar; // player avatar
     private GameObject rightHand; // for ray cast position
-    private LineRenderer rayCastLine; // line from hand
     private ModeController modeController;
     private Vector3 forward;
     private Vector3 up;
@@ -18,7 +17,6 @@ public class RayCastController : MonoBehaviour
     {
         rightHand = transform.parent.gameObject;
         avatar = gameObject.GetComponentInParent<OvrAvatar>();
-        rayCastLine = gameObject.GetComponentInChildren<LineRenderer>();
         modeController = GameObject.Find("LogicController").GetComponent<ModeController>();
     }
 
@@ -26,14 +24,7 @@ public class RayCastController : MonoBehaviour
     void Update()
     {
         avatar.GetPointingDirection(OvrAvatar.HandType.Right, ref forward, ref up);
-
-        // should we keep a ray visible at all times (dunno how you would change back to like edit mode if ray isnt visible in play mode
-        //rayCastLine.transform.parent.gameObject.SetActive((modeController.GetMode() != "PLAY"));
-
-        if (rayCastLine.transform.parent.gameObject.activeSelf == true)
-        {
-            RayCast();
-        }
+        RayCast();
     }
 
     private void RayCast()
@@ -47,13 +38,17 @@ public class RayCastController : MonoBehaviour
 
             if (hitObject.name.Contains("NoteBlock"))
             {
-                //Debug.Log(hitObject.name); // working
+                // is this supposed to be rhandtrigger?
+                if (modeController.GetMode().Equals("EDIT") && OVRInput.Get(OVRInput.RawButton.RHandTrigger))
+                {
+                    // assign the current mode's note to the note block
+                    hitObject.GetComponent<NoteBlockBehavior>().AssignNote();
+                }
             }
 
             else if (hitObject.name == "ChangeModeButton")
             {
-                // this changes too fast
-                if (OVRInput.Get(OVRInput.RawButton.RIndexTrigger))
+                if (OVRInput.GetDown(OVRInput.RawButton.RIndexTrigger))
                 {
                     modeController.ChangeMode();
                 }
