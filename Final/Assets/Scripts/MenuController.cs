@@ -14,7 +14,7 @@ public class MenuController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -49,5 +49,20 @@ public class MenuController : MonoBehaviour
     {
         if (statusText[NOTE_INDEX].text.Length == 7) statusText[NOTE_INDEX].text += modifier;
         else statusText[NOTE_INDEX].text = statusText[NOTE_INDEX].text.Substring(0, 7) + modifier;
+    }
+
+    public string GetSelectedNote()
+    {
+        string noteName = "N";
+        string noteModifier = "♮";
+        string octave = "N";
+
+        if (statusText[NOTE_INDEX].text.Length >= 7)
+            noteName = statusText[NOTE_INDEX].text.Substring(6, 1);
+        if (statusText[NOTE_INDEX].text.Length == 8)
+            noteModifier = statusText[NOTE_INDEX].text.Substring(7, 1);
+        if (statusText[OCTAVE_INDEX].text.Length == 9)
+            octave = statusText[OCTAVE_INDEX].text.Substring(8, 1);
+        return noteName + noteModifier + octave;
     }
 }

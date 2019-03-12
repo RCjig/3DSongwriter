@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class NoteBlockBehavior : MonoBehaviour
 {
-    private Material mat;
     private Note note;
 
     // Start is called before the first frame update
@@ -19,9 +18,11 @@ public class NoteBlockBehavior : MonoBehaviour
         
     }
 
-    public void AssignNote()
+    public void AssignNote(Note newNote)
     {
         // update the render material
         // assign the current note value
+        note = newNote;
+        this.GetComponent<Renderer>().material = new Material(note.getMaterial());
     }
 }
