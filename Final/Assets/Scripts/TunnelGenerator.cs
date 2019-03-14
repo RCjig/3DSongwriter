@@ -17,7 +17,20 @@ public class TunnelGenerator : MonoBehaviour
         {
             curr = Instantiate(NoteGate);
             curr.transform.position = new Vector3(0.0f, 3.6f, i);
-            curr.name = "NoteGate_" + gateCount++;
+            curr.name = "NoteGate_" + gateCount;
+            for (int j = 0; j < curr.transform.childCount; j++)
+            {
+                if (curr.transform.GetChild(j).name != "TriggerLine")
+                {
+                    for (int k = 0; k < curr.transform.GetChild(j).transform.childCount; k++)
+                    {
+                        curr.transform.GetChild(j).transform.GetChild(k).name += "_Gate_" + gateCount;
+                    }
+                }
+
+                curr.transform.GetChild(j).name += "_Gate_" + gateCount;
+            }
+            gateCount++;
         }
     }
 

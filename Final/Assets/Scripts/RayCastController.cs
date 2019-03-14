@@ -38,6 +38,7 @@ public class RayCastController : MonoBehaviour
     private void RayCast()
     {
         Ray ray = new Ray(rightHand.transform.position, forward);
+        Debug.DrawRay(rightHand.transform.position, forward, Color.green);
         RaycastHit hit;
 
         if (Physics.Raycast(ray, out hit))
@@ -46,7 +47,6 @@ public class RayCastController : MonoBehaviour
 
             if (hitObject.name.Contains("NoteBlock"))
             {
-                // is this supposed to be rhandtrigger?
                 if (modeController.GetMode().Equals("EDIT") && OVRInput.Get(OVRInput.RawButton.RIndexTrigger))
                 {
                     // assign the current note to the note block
@@ -66,12 +66,14 @@ public class RayCastController : MonoBehaviour
             {
                 if (OVRInput.GetDown(OVRInput.RawButton.RHandTrigger))
                 {
-                    menuController.NotSet();
+                    string type = "";
 
-                    if (hitObject.name[0] == '♭' || hitObject.name[0] == '♮' || hitObject.name[0] == '#')
-                        menuController.AppendModifier(hitObject.name[0].ToString());
-                    else
-                        menuController.EnterNote(hitObject.name[0].ToString());
+                    if (hitObject.name[0] == '♭' || hitObject.name[0] == '♮' || hitObject.name[0] == '#') type = "NOTE_MODIFIER";
+                    else type = "NOTE";
+
+                    menuController.NotSet();
+                    menuController.ResetButtons(type);
+                    menuController.Enter(type, hitObject.name[0].ToString());
                 }
             }
 
@@ -80,7 +82,8 @@ public class RayCastController : MonoBehaviour
                 if (OVRInput.GetDown(OVRInput.RawButton.RHandTrigger))
                 {
                     menuController.NotSet();
-                    menuController.EnterOctave(hitObject.name[0].ToString());
+                    menuController.ResetButtons("OCTAVE");
+                    menuController.Enter("OCTAVE", hitObject.name[0].ToString());
                 }
             }
 

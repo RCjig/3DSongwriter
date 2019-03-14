@@ -188,9 +188,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: '1
-
-'
+  m_Text: 1
 --- !u!222 &68095375
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1277,26 +1275,6 @@ RectTransform:
   m_AnchoredPosition: {x: -0.018, y: 0.035}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &499910239 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1000010482306814, guid: 84c8b8609f9bb434eaf5248f17ff1293,
-    type: 3}
-  m_PrefabInstance: {fileID: 934110640}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &499910240
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 499910239}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e298ef703c998714abd023f86caacc4a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rightController: 0
-  MusicBox: {fileID: 368823304}
 --- !u!4 &499910241 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4000011212216358, guid: 84c8b8609f9bb434eaf5248f17ff1293,
@@ -3868,6 +3846,21 @@ MonoBehaviour:
   - {fileID: 1753200777}
   - {fileID: 956577147}
   - {fileID: 1231773848}
+  keypadButtons:
+  - {fileID: 1538268380}
+  - {fileID: 1442408902}
+  - {fileID: 1972661487}
+  - {fileID: 765978358}
+  - {fileID: 306178158}
+  - {fileID: 354507512}
+  - {fileID: 1705382374}
+  - {fileID: 2101032427}
+  - {fileID: 2022058617}
+  - {fileID: 662270492}
+  - {fileID: 297598612}
+  - {fileID: 70073990}
+  - {fileID: 106917515}
+  - {fileID: 882132565}
 --- !u!1 &1660684766
 GameObject:
   m_ObjectHideFlags: 0
@@ -4324,7 +4317,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.1549, y: -0.03409958}
+  m_AnchoredPosition: {x: -0.1548996, y: -0.03409958}
   m_SizeDelta: {x: -70, y: -70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1753200777
