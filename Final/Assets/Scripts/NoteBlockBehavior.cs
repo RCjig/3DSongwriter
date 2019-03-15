@@ -29,13 +29,9 @@ public class NoteBlockBehavior : MonoBehaviour
     private void PlayNote()
     {
         if (!audioSource.isPlaying)
-        {
             audioSource.Play();
-            if (audioSource.time > 0.5)
-            {
-                audioSource.Stop(); // reset?
-            }
-        }
+        else if (audioSource.time > 0.5)
+            audioSource.Stop();
     }
 
     public void Play()
