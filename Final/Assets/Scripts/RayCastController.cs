@@ -45,6 +45,9 @@ public class RayCastController : MonoBehaviour
         {
             GameObject hitObject = hit.collider.gameObject;
 
+            if (hitObject.name.Contains("NoteBlock"))
+                hitObject.GetComponent<NoteBlockBehavior>().Play();
+
             if (modeController.GetMode().Equals("EDIT") && OVRInput.Get(OVRInput.RawButton.RIndexTrigger))
             {
                 if (hitObject.name.Contains("NoteBlock"))
