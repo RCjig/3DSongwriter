@@ -10,16 +10,25 @@ public class MenuController : MonoBehaviour
     readonly int OCTAVE_INDEX = 2;
     readonly int NOTES_END_INDEX = 7;
     readonly int NOTE_MODIFIERS_END_INDEX = 10;
+    readonly string ARROW = " ▼";
 
-    public Text[] statusText;
     public Button[] keypadButtons;
+    public Button[] dropdownButtonOptions;
+    public Button dropdownButton;
 
     private bool isSet;
+    private bool isExpanded;
 
     // Start is called before the first frame update
     void Start()
     {
         isSet = false;
+        isExpanded = false;
+
+        foreach (var button in dropdownButtonOptions)
+        {
+            button.gameObject.SetActive(false);
+        }
     }
 
     // Update is called once per frame
@@ -28,11 +37,35 @@ public class MenuController : MonoBehaviour
         
     }
 
-    public void Set()
+    public bool Set()
     {
-        statusText[IS_SET_INDEX].text = "SET";
-        statusText[IS_SET_INDEX].color = Color.green;
         isSet = true;
+
+        int valid = 0;
+        int start = 0;
+        int end = 0;
+
+        SetStartAndEnd("NOTE", ref start, ref end);
+        for (int i = start; i < end; i++)
+        {
+            if (keypadButtons[i].colors.normalColor == Color.red)
+            {
+                valid++;
+                break;
+            }
+        }
+
+        SetStartAndEnd("OCTAVE", ref start, ref end);
+        for (int i = start; i < end; i++)
+        {
+            if (keypadButtons[i].colors.normalColor == Color.red)
+            {
+                valid++;
+                break;
+            }
+        }
+
+        if (valid < 2) return false;
 
         foreach (Button button in keypadButtons)
         {
@@ -43,13 +76,12 @@ public class MenuController : MonoBehaviour
                 button.colors = cb;
             }
         }
+
+        return true;
     }
 
     public void NotSet()
     {
-        statusText[IS_SET_INDEX].text = "NOT SET";
-        statusText[IS_SET_INDEX].color = Color.red;
-
         if (!isSet) return;
 
         isSet = false;
@@ -125,6 +157,27 @@ public class MenuController : MonoBehaviour
         }
 
         return noteName + noteModifier + octave;
+    }
+
+    public int GetNumberOfGates()
+    {
+        return System.Int32.Parse(dropdownButton.GetComponentInChildren<Text>().text.Substring(0, 3));
+    }
+
+    public void ExpandOrCollapseDropdown()
+    {
+        isExpanded = !isExpanded;
+
+        foreach (var button in dropdownButtonOptions)
+        {
+            button.gameObject.SetActive(isExpanded);
+        }
+    }
+
+    public void SetDropdown(int index)
+    {
+        dropdownButton.GetComponentInChildren<Text>().text = dropdownButtonOptions[index].GetComponentInChildren<Text>().text + ARROW;
+        ExpandOrCollapseDropdown();
     }
 
     private bool IsNoteSet()

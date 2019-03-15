@@ -4,16 +4,34 @@ using UnityEngine;
 
 public class TunnelGenerator : MonoBehaviour
 {
+    readonly float SPACING = 1.2f;
+
     public GameObject NoteGate;
+
+    private bool hasBeenCreated;
 
     // Start is called before the first frame update
     void Start()
     {
+        hasBeenCreated = false;
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+
+    public void CreateTunnel(int gateCount)
+    {
+        if (hasBeenCreated) return;
+
         Vector3 currPosition = Vector3.zero;
         GameObject curr;
-        int gateCount = 0;
+        float gateCountLoopLength = (float) gateCount * SPACING;
+        hasBeenCreated = true;
 
-        for (float i = 0.0f; i < (200.0f * 1.2f) - 1; i += 1.2f)
+        for (float i = 0.0f; i < gateCountLoopLength - 1; i += SPACING)
         {
             curr = Instantiate(NoteGate);
             curr.transform.position = new Vector3(0.0f, 3.6f, i);
@@ -34,9 +52,13 @@ public class TunnelGenerator : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
+    public void DestroyTunnel()
     {
-        
+        hasBeenCreated = false;
+
+        foreach (var noteGate in GameObject.FindGameObjectsWithTag("NoteGate"))
+        {
+            Destroy(noteGate);
+        }
     }
 }
