@@ -7,6 +7,8 @@ public class ModeController : MonoBehaviour
 {
     enum MODE { CREATE, EDIT, PLAY };
 
+    public GameObject createMenu;
+    public GameObject editMenu;
     public Text modeText;
 
     private MODE mode;
@@ -14,9 +16,9 @@ public class ModeController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        mode = MODE.EDIT; // change to CREATE later
+        mode = MODE.CREATE;
         modeText.text = mode.ToString();
-        modeText.color = Color.green;
+        modeText.color = Color.white;
     }
 
     // Update is called once per frame
@@ -31,16 +33,20 @@ public class ModeController : MonoBehaviour
         {
             mode = MODE.EDIT;
             modeText.color = Color.green;
+            createMenu.SetActive(false);
+            editMenu.SetActive(true);
         }
         else if (mode == MODE.EDIT)
         {
             mode = MODE.PLAY;
             modeText.color = Color.red;
+            editMenu.SetActive(false);
         }
         else
         {
             mode = MODE.CREATE;
             modeText.color = Color.white;
+            createMenu.SetActive(true);
         }
 
         modeText.text = mode.ToString();

@@ -45,26 +45,22 @@ public class RayCastController : MonoBehaviour
         {
             GameObject hitObject = hit.collider.gameObject;
 
-            if (hitObject.name.Contains("NoteBlock"))
+            if (modeController.GetMode().Equals("EDIT") && OVRInput.Get(OVRInput.RawButton.RIndexTrigger))
             {
-                if (modeController.GetMode().Equals("EDIT") && OVRInput.Get(OVRInput.RawButton.RIndexTrigger))
+                if (hitObject.name.Contains("NoteBlock"))
                 {
                     // assign the current note to the note block
                     hitObject.GetComponent<NoteBlockBehavior>().AssignNote(currNote);
                 }
             }
-
-            else if (hitObject.name == "ChangeModeButton")
-            {
-                if (OVRInput.GetDown(OVRInput.RawButton.RHandTrigger))
+            else if (OVRInput.GetDown(OVRInput.RawButton.RHandTrigger))
+            { 
+                if (hitObject.name == "ChangeModeButton")
                 {
                     modeController.ChangeMode();
                 }
-            }
 
-            else if (hitObject.name.Contains("_NoteButton"))
-            {
-                if (OVRInput.GetDown(OVRInput.RawButton.RHandTrigger))
+                else if (hitObject.name.Contains("_NoteButton"))
                 {
                     string type = "";
 
@@ -75,27 +71,43 @@ public class RayCastController : MonoBehaviour
                     menuController.ResetButtons(type);
                     menuController.Enter(type, hitObject.name[0].ToString());
                 }
-            }
 
-            else if (hitObject.name.Contains("_OctaveButton"))
-            {
-                if (OVRInput.GetDown(OVRInput.RawButton.RHandTrigger))
+                else if (hitObject.name.Contains("_OctaveButton"))
                 {
                     menuController.NotSet();
                     menuController.ResetButtons("OCTAVE");
                     menuController.Enter("OCTAVE", hitObject.name[0].ToString());
                 }
-            }
 
-            else if (hitObject.name == "SetButton")
-            {
-                if (OVRInput.GetDown(OVRInput.RawButton.RHandTrigger))
+                else if (hitObject.name == "SetButton")
                 {
-                    string selectedNote = menuController.GetSelectedNote();
-                    Debug.Log("Looking for: " + selectedNote);
-                    this.currNote = musicBoxController.GetNote(selectedNote);
-                    Debug.Log("Setting: " + this.currNote.getName());
-                    menuController.Set();
+                    if (menuController.Set())
+                    {
+                        string selectedNote = menuController.GetSelectedNote();
+                        Debug.Log("Looking for: " + selectedNote);
+                        this.currNote = musicBoxController.GetNote(selectedNote);
+                        Debug.Log("Setting: " + this.currNote.getName());
+                    }
+                }
+
+                else if (hitObject.name == "GateDropdown")
+                {
+                    menuController.ExpandOrCollapseDropdown();
+                }
+
+                else if (hitObject.name.Contains("GateDropdown_Option_"))
+                {
+                    menuController.SetDropdown(hitObject.name[hitObject.name.Length-1] - '0' - 1);
+                }
+
+                else if (hitObject.name == "CreateButton")
+                {
+                    GameObject.Find("Tunnel").GetComponent<TunnelGenerator>().CreateTunnel(menuController.GetNumberOfGates());
+                }
+
+                else if (hitObject.name == "ResetButton")
+                {
+                    GameObject.Find("Tunnel").GetComponent<TunnelGenerator>().DestroyTunnel();
                 }
             }
         }
