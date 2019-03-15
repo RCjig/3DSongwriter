@@ -13,6 +13,10 @@ public class MusicBoxController : MonoBehaviour
     public Color[] noteColors;
     private Note[] notes;
 
+    private readonly char flat = '♭';
+    private readonly char sharp = '#';
+    private readonly char natural = '♮';
+
     private readonly int numBaseNotes = 12;
 
     // Start is called before the first frame update
@@ -32,8 +36,8 @@ public class MusicBoxController : MonoBehaviour
             currMat.SetColor("_Color", noteColors[i % numBaseNotes]);
             notes[i] = new Note(noteSounds[i], noteNames[i], currMat);
         }
-        // adding the empty note to the array, where NNN means no note, no note modifier, and no octave number
-        notes[noteSounds.Length] = new Note(null, "N♮N", sourceMaterial);
+        // adding the empty note to the array (no note modifier and no octave number)
+        notes[noteSounds.Length] = new Note(null, "N" + natural + "N", sourceMaterial);
     }
 
     // Update is called once per frame
@@ -42,12 +46,34 @@ public class MusicBoxController : MonoBehaviour
         
     }
 
+    private bool SameNote (string musicBoxNote, string inputNote)
+    {
+        string compareTo = inputNote;
+        char octave = inputNote[2];
+
+        // handling flat inputs
+        if (inputNote.Equals("A" + flat + octave)) compareTo = "G" + sharp + octave;
+        else if (inputNote.Equals("B" + flat + octave)) compareTo = "A" + sharp + octave;
+        else if (inputNote.Equals("D" + flat + octave)) compareTo = "C" + sharp + octave;
+        else if (inputNote.Equals("E" + flat + octave)) compareTo = "D" + sharp + octave;
+        else if (inputNote.Equals("G" + flat + octave)) compareTo = "F" + sharp + octave;
+        // handling unusual flats
+        else if (inputNote.Equals("C" + flat + octave)) compareTo = "B" + natural + octave;
+        else if (inputNote.Equals("F" + flat + octave)) compareTo = "E" + natural + octave;
+        // handling unusual sharps
+        else if (inputNote.Equals("B" + sharp + octave)) compareTo = "C" + natural + octave;
+        else if (inputNote.Equals("E" + sharp + octave)) compareTo = "F" + natural + octave;
+
+        return (musicBoxNote.CompareTo(compareTo) == 0);
+
+    }
+
     public Note GetNote(string lookingFor)
     {
         for (int i = 0; i < notes.Length; i++)
         {
-            Debug.Log(notes[i].getName().Trim());
-            if (notes[i].getName().Trim().CompareTo(lookingFor) == 0)
+            string musicBoxNote = notes[i].getName().Trim();
+            if (SameNote(musicBoxNote, lookingFor))
                 return notes[i];
         }
         // return the default note

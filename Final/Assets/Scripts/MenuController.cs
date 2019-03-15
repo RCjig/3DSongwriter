@@ -114,16 +114,6 @@ public class MenuController : MonoBehaviour
         string noteModifier = "♮";
         string octave = "N";
 
-        /*
-        if (statusText[NOTE_INDEX].text.Length >= 7)
-            noteName = statusText[NOTE_INDEX].text.Substring(6, 1);
-        if (statusText[NOTE_INDEX].text.Length == 8)
-            noteModifier = statusText[NOTE_INDEX].text.Substring(7, 1);
-        if (statusText[OCTAVE_INDEX].text.Length == 9)
-            octave = statusText[OCTAVE_INDEX].text.Substring(8, 1);
-            */
-
-
         for (int i = 0; i < keypadButtons.Length; i++)
         {
             if (keypadButtons[i].colors.normalColor == Color.green)
@@ -134,8 +124,6 @@ public class MenuController : MonoBehaviour
             }
         }
 
-        // TODO: Fix this
-        Debug.Log(noteName + noteModifier + octave + "\n");
         return noteName + noteModifier + octave;
     }
 
