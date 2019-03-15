@@ -5436,7 +5436,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77eb0e0a59df7234bb09318c6914fc8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NoteGate: {fileID: 3161278547131000324, guid: 182753169e6d7ba4aa6a987cd28ead38,
+  NoteGate: {fileID: 2131201424784663637, guid: 182753169e6d7ba4aa6a987cd28ead38,
     type: 3}
 --- !u!4 &1791586490
 Transform:
