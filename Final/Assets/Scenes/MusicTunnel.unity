@@ -346,7 +346,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 1
+  m_Text: 3
 --- !u!222 &68095375
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -369,7 +369,7 @@ GameObject:
   - component: {fileID: 70073990}
   - component: {fileID: 70073989}
   m_Layer: 0
-  m_Name: 2_OctaveButton
+  m_Name: 4_OctaveButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -633,7 +633,7 @@ GameObject:
   - component: {fileID: 106917515}
   - component: {fileID: 106917514}
   m_Layer: 0
-  m_Name: 3_OctaveButton
+  m_Name: 5_OctaveButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1010,7 +1010,7 @@ GameObject:
   - component: {fileID: 297598612}
   - component: {fileID: 297598611}
   m_Layer: 0
-  m_Name: 1_OctaveButton
+  m_Name: 3_OctaveButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1471,19 +1471,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: ec8c6ab29ba62044f89de2e954d0d8d6, type: 3}
   - {fileID: 8300000, guid: 5e110f93081d81845a8df08deae01d67, type: 3}
   - {fileID: 8300000, guid: bae041944bb3b294bb1a759e20fe18dd, type: 3}
-  noteNames:
-  - "G\u266E3"
-  - G#3
-  - "A\u266E3"
-  - A#3
-  - "B\u266E3"
-  - "C\u266E4"
-  - C#4
-  - "D\u266E4"
-  - D#4
-  - "E\u266E4"
-  - "F\u266E4"
-  - F#4
   noteColors:
   - {r: 1, g: 0, b: 0, a: 0}
   - {r: 1, g: 0.33333334, b: 0, a: 0}
@@ -1703,7 +1690,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: '#'
+  m_Text: "\u266F"
 --- !u!222 &551897775
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2323,7 +2310,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 3
+  m_Text: 5
 --- !u!222 &605904059
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2425,7 +2412,7 @@ GameObject:
   - component: {fileID: 662270492}
   - component: {fileID: 662270491}
   m_Layer: 0
-  m_Name: '#_NoteButton'
+  m_Name: "\u266F_NoteButton"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3103,7 +3090,7 @@ GameObject:
   - component: {fileID: 882132565}
   - component: {fileID: 882132564}
   m_Layer: 0
-  m_Name: 4_OctaveButton
+  m_Name: 6_OctaveButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3941,7 +3928,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 2
+  m_Text: 4
 --- !u!222 &1230142347
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5012,7 +4999,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 4
+  m_Text: 6
 --- !u!222 &1660684769
 CanvasRenderer:
   m_ObjectHideFlags: 0

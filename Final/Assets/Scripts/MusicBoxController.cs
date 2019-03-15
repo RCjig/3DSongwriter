@@ -9,12 +9,11 @@ public class MusicBoxController : MonoBehaviour
     // size of array = # notes * # octaves we want (so 12 * 1, for now)
     public Material sourceMaterial;
     public AudioClip[] noteSounds;
-    public string[] noteNames;
     public Color[] noteColors;
     private Note[] notes;
 
     private readonly char flat = '♭';
-    private readonly char sharp = '#';
+    private readonly char sharp = '♯';
     private readonly char natural = '♮';
 
     private readonly int numBaseNotes = 12;
@@ -22,7 +21,7 @@ public class MusicBoxController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if ((noteSounds.Length <= 0) || !((noteSounds.Length == noteNames.Length) && (noteSounds.Length % numBaseNotes == 0)))
+        if ((noteSounds.Length <= 0) || !(noteSounds.Length % numBaseNotes == 0))
         {
             Debug.Log("MUSIC BOX NOT CONFIGURED CORRECTLY");
             return;
@@ -34,7 +33,7 @@ public class MusicBoxController : MonoBehaviour
         {
             currMat = new Material(sourceMaterial);
             currMat.SetColor("_Color", noteColors[i % numBaseNotes]);
-            notes[i] = new Note(noteSounds[i], noteNames[i], currMat);
+            notes[i] = new Note(noteSounds[i], noteSounds[i].name, currMat);
         }
         // adding the empty note to the array (no note modifier and no octave number)
         notes[noteSounds.Length] = new Note(null, "N" + natural + "N", sourceMaterial);

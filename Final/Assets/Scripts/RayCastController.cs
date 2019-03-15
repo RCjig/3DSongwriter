@@ -64,7 +64,7 @@ public class RayCastController : MonoBehaviour
                 {
                     string type = "";
 
-                    if (hitObject.name[0] == '♭' || hitObject.name[0] == '♮' || hitObject.name[0] == '#') type = "NOTE_MODIFIER";
+                    if (hitObject.name[0] == '♭' || hitObject.name[0] == '♮' || hitObject.name[0] == '♯') type = "NOTE_MODIFIER";
                     else type = "NOTE";
 
                     menuController.NotSet();
