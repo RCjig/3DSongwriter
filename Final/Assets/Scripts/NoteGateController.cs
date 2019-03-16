@@ -31,6 +31,13 @@ public class NoteGateController : MonoBehaviour
     private void OnLineTrigger()
     {
         // play notes
-        // Debug.Log(this.name + "crossed\n"); // this works
+        foreach (Transform layer in transform)
+        {
+            if (layer.tag != "GateLayer") continue;
+            foreach (Transform noteBlock in layer.transform)
+            {
+                noteBlock.gameObject.GetComponent<NoteBlockBehavior>().Play();
+            }
+        }
     }
 }

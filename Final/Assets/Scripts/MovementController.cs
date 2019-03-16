@@ -19,10 +19,13 @@ public class MovementController : MonoBehaviour
         if (modeController.GetMode().Equals("EDIT"))
         {
             float moveSpeed = OVRInput.Get(OVRInput.RawAxis1D.LIndexTrigger);
-            Debug.Log(moveSpeed.ToString());
+            //Debug.Log(moveSpeed.ToString());
             Vector3 movementVector = transform.forward * moveSpeed * MOVEMENT_SCALE;
             movementVector.y = 0.0f;
-            transform.position -= movementVector; // dont ask why its negative
+            GetComponent<CharacterController>().Move(movementVector);
+            //transform.position += movementVector;
+            //Debug.Log(movementVector.magnitude.ToString());
+            Debug.Log(GetComponent<CharacterController>().velocity.ToString());
         }
     }
 }

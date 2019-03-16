@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 3781014972014216848}
   - component: {fileID: 8629320151379821360}
   - component: {fileID: 5576519219771906049}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: NoteBlock_19
-  m_TagString: Untagged
+  m_TagString: NoteBlock
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -52,7 +52,7 @@ MeshRenderer:
   m_GameObject: {fileID: 347053697469736482}
   m_Enabled: 1
   m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_ReceiveShadows: 0
   m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
@@ -215,9 +215,9 @@ GameObject:
   - component: {fileID: 2996262553932512375}
   - component: {fileID: 3070363376137490615}
   - component: {fileID: 3268339721560869226}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: NoteBlock_11
-  m_TagString: Untagged
+  m_TagString: NoteBlock
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -253,7 +253,7 @@ MeshRenderer:
   m_GameObject: {fileID: 812643931092126455}
   m_Enabled: 1
   m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_ReceiveShadows: 0
   m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
@@ -413,7 +413,7 @@ GameObject:
   - component: {fileID: 496522848631874989}
   m_Layer: 2
   m_Name: Left
-  m_TagString: Untagged
+  m_TagString: GateLayer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -453,9 +453,9 @@ GameObject:
   - component: {fileID: 1498286605711372041}
   - component: {fileID: 1595607853141254054}
   - component: {fileID: 808721841767183317}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: NoteBlock_12
-  m_TagString: Untagged
+  m_TagString: NoteBlock
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -491,7 +491,7 @@ MeshRenderer:
   m_GameObject: {fileID: 1294692606647118429}
   m_Enabled: 1
   m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_ReceiveShadows: 0
   m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
@@ -654,9 +654,9 @@ GameObject:
   - component: {fileID: 2924426071757464470}
   - component: {fileID: 583195479551703094}
   - component: {fileID: 1900775350008965222}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: NoteBlock_1
-  m_TagString: Untagged
+  m_TagString: NoteBlock
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -692,7 +692,7 @@ MeshRenderer:
   m_GameObject: {fileID: 1566123324518213917}
   m_Enabled: 1
   m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_ReceiveShadows: 0
   m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
@@ -855,9 +855,9 @@ GameObject:
   - component: {fileID: 2581725970062949444}
   - component: {fileID: 1240437928607160852}
   - component: {fileID: 2355158276222101202}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: NoteBlock_3
-  m_TagString: Untagged
+  m_TagString: NoteBlock
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -893,7 +893,7 @@ MeshRenderer:
   m_GameObject: {fileID: 1831321721500219122}
   m_Enabled: 1
   m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_ReceiveShadows: 0
   m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
@@ -1100,7 +1100,7 @@ GameObject:
   - component: {fileID: 275241448155227119}
   m_Layer: 2
   m_Name: Top
-  m_TagString: Untagged
+  m_TagString: GateLayer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1140,9 +1140,9 @@ GameObject:
   - component: {fileID: 2315921704459694825}
   - component: {fileID: 4893760359872806847}
   - component: {fileID: 5993249563559540598}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: NoteBlock_15
-  m_TagString: Untagged
+  m_TagString: NoteBlock
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1178,7 +1178,7 @@ MeshRenderer:
   m_GameObject: {fileID: 2702931391429665993}
   m_Enabled: 1
   m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_ReceiveShadows: 0
   m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
@@ -1341,9 +1341,9 @@ GameObject:
   - component: {fileID: 8529273341435720884}
   - component: {fileID: 8182674267283261137}
   - component: {fileID: 5738588590797098107}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: NoteBlock_5
-  m_TagString: Untagged
+  m_TagString: NoteBlock
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1379,7 +1379,7 @@ MeshRenderer:
   m_GameObject: {fileID: 3155138915063200617}
   m_Enabled: 1
   m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_ReceiveShadows: 0
   m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
@@ -1542,9 +1542,9 @@ GameObject:
   - component: {fileID: 8347965555003822566}
   - component: {fileID: 3702877807190618208}
   - component: {fileID: 4190302583500395918}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: NoteBlock_18
-  m_TagString: Untagged
+  m_TagString: NoteBlock
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1580,7 +1580,7 @@ MeshRenderer:
   m_GameObject: {fileID: 3317946172792145350}
   m_Enabled: 1
   m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_ReceiveShadows: 0
   m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
@@ -1743,9 +1743,9 @@ GameObject:
   - component: {fileID: 6215069579052310354}
   - component: {fileID: 5696601281539319393}
   - component: {fileID: 7134005696723222642}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: NoteBlock_8
-  m_TagString: Untagged
+  m_TagString: NoteBlock
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1781,7 +1781,7 @@ MeshRenderer:
   m_GameObject: {fileID: 3703912605839678130}
   m_Enabled: 1
   m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_ReceiveShadows: 0
   m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
@@ -1944,9 +1944,9 @@ GameObject:
   - component: {fileID: 8333370744336686352}
   - component: {fileID: 7168885365289075412}
   - component: {fileID: 198522156396836850}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: NoteBlock_13
-  m_TagString: Untagged
+  m_TagString: NoteBlock
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1982,7 +1982,7 @@ MeshRenderer:
   m_GameObject: {fileID: 3754574780506444531}
   m_Enabled: 1
   m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_ReceiveShadows: 0
   m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
@@ -2145,9 +2145,9 @@ GameObject:
   - component: {fileID: 3098092289187046887}
   - component: {fileID: 7555344559963868513}
   - component: {fileID: 5241397196785090635}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: NoteBlock_7
-  m_TagString: Untagged
+  m_TagString: NoteBlock
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2183,7 +2183,7 @@ MeshRenderer:
   m_GameObject: {fileID: 3872093273428412441}
   m_Enabled: 1
   m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_ReceiveShadows: 0
   m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
@@ -2346,9 +2346,9 @@ GameObject:
   - component: {fileID: 8073504797214093237}
   - component: {fileID: 7714280949480618199}
   - component: {fileID: 2568349493241112693}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: NoteBlock_16
-  m_TagString: Untagged
+  m_TagString: NoteBlock
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2384,7 +2384,7 @@ MeshRenderer:
   m_GameObject: {fileID: 4932147062401420098}
   m_Enabled: 1
   m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_ReceiveShadows: 0
   m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
@@ -2547,9 +2547,9 @@ GameObject:
   - component: {fileID: 4625730931643293216}
   - component: {fileID: 5234618919952743070}
   - component: {fileID: 5040116357823583284}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: NoteBlock_14
-  m_TagString: Untagged
+  m_TagString: NoteBlock
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2585,7 +2585,7 @@ MeshRenderer:
   m_GameObject: {fileID: 5336342919963519473}
   m_Enabled: 1
   m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_ReceiveShadows: 0
   m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
@@ -2745,7 +2745,7 @@ GameObject:
   - component: {fileID: 2979182086683021168}
   m_Layer: 2
   m_Name: Right
-  m_TagString: Untagged
+  m_TagString: GateLayer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2785,9 +2785,9 @@ GameObject:
   - component: {fileID: 4521446552155062663}
   - component: {fileID: 5874443338560090638}
   - component: {fileID: 1415874313496813768}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: NoteBlock_9
-  m_TagString: Untagged
+  m_TagString: NoteBlock
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2823,7 +2823,7 @@ MeshRenderer:
   m_GameObject: {fileID: 5862996850186362020}
   m_Enabled: 1
   m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_ReceiveShadows: 0
   m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
@@ -2986,9 +2986,9 @@ GameObject:
   - component: {fileID: 7321607758960884033}
   - component: {fileID: 5162781787267561250}
   - component: {fileID: 8869703541502662176}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: NoteBlock_4
-  m_TagString: Untagged
+  m_TagString: NoteBlock
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3024,7 +3024,7 @@ MeshRenderer:
   m_GameObject: {fileID: 6218149506965649945}
   m_Enabled: 1
   m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_ReceiveShadows: 0
   m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
@@ -3187,9 +3187,9 @@ GameObject:
   - component: {fileID: 5045220205040210563}
   - component: {fileID: 5704709564384962127}
   - component: {fileID: 4935999908689302008}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: NoteBlock_20
-  m_TagString: Untagged
+  m_TagString: NoteBlock
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3225,7 +3225,7 @@ MeshRenderer:
   m_GameObject: {fileID: 6232879440540409162}
   m_Enabled: 1
   m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_ReceiveShadows: 0
   m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
@@ -3514,9 +3514,9 @@ GameObject:
   - component: {fileID: 7402563145810117986}
   - component: {fileID: 7384080725735160551}
   - component: {fileID: 3149114905432372869}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: NoteBlock_0
-  m_TagString: Untagged
+  m_TagString: NoteBlock
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3551,12 +3551,12 @@ MeshRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7021804643179294470}
   m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
   m_DynamicOccludee: 1
   m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
+  m_LightProbeUsage: 0
+  m_ReflectionProbeUsage: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -3715,9 +3715,9 @@ GameObject:
   - component: {fileID: 6260594336085992074}
   - component: {fileID: 2895072501174698734}
   - component: {fileID: 1992723676563903823}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: NoteBlock_2
-  m_TagString: Untagged
+  m_TagString: NoteBlock
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3753,7 +3753,7 @@ MeshRenderer:
   m_GameObject: {fileID: 7235815228647619221}
   m_Enabled: 1
   m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_ReceiveShadows: 0
   m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
@@ -3916,9 +3916,9 @@ GameObject:
   - component: {fileID: 1104372245828650496}
   - component: {fileID: 2319091678056695501}
   - component: {fileID: 6150317836558275893}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: NoteBlock_10
-  m_TagString: Untagged
+  m_TagString: NoteBlock
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3954,7 +3954,7 @@ MeshRenderer:
   m_GameObject: {fileID: 7336139178709681329}
   m_Enabled: 1
   m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_ReceiveShadows: 0
   m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
@@ -4117,9 +4117,9 @@ GameObject:
   - component: {fileID: 444088349386486482}
   - component: {fileID: 1221843703357373306}
   - component: {fileID: 1353385831421125782}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: NoteBlock_17
-  m_TagString: Untagged
+  m_TagString: NoteBlock
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4155,7 +4155,7 @@ MeshRenderer:
   m_GameObject: {fileID: 7906152722862796806}
   m_Enabled: 1
   m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_ReceiveShadows: 0
   m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
@@ -4318,9 +4318,9 @@ GameObject:
   - component: {fileID: 255208338472485226}
   - component: {fileID: 2477137796597260851}
   - component: {fileID: 387789836588550423}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: NoteBlock_6
-  m_TagString: Untagged
+  m_TagString: NoteBlock
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4356,7 +4356,7 @@ MeshRenderer:
   m_GameObject: {fileID: 8104660345886202507}
   m_Enabled: 1
   m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_ReceiveShadows: 0
   m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
