@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TunnelGenerator : MonoBehaviour
+public class TunnelController : MonoBehaviour
 {
     readonly float SPACING = 1.5f;
 

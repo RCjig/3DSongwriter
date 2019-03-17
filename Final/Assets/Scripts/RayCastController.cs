@@ -72,12 +72,12 @@ public class RayCastController : MonoBehaviour
 
             else if (hitObject.name == "CreateButton")
             {
-                GameObject.Find("Tunnel").GetComponent<TunnelGenerator>().CreateTunnel(menuController.GetNumberOfGates());
+                GameObject.Find("Tunnel").GetComponent<TunnelController>().CreateTunnel(menuController.GetNumberOfGates());
             }
 
             else if (hitObject.name == "ResetButton")
             {
-                GameObject.Find("Tunnel").GetComponent<TunnelGenerator>().DestroyTunnel();
+                GameObject.Find("Tunnel").GetComponent<TunnelController>().DestroyTunnel();
             }
         }
     }
