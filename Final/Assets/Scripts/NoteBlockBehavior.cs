@@ -56,8 +56,6 @@ public class NoteBlockBehavior : MonoBehaviour
         // assign the current note value
         note = newNote;
         this.GetComponent<Renderer>().material = new Material(note.getMaterial());
-        AudioClip sound = note.getSound();
-        if (sound)
-            SetAudioClip(sound);
+        SetAudioClip(note.getSound());
     }
 }
