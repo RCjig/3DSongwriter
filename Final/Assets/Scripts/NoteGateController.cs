@@ -9,27 +9,33 @@ public class NoteGateController : MonoBehaviour
 
     private GameObject playerController;
     private LineRenderer triggerLine;
+    private bool canPlay;
 
     // Start is called before the first frame update
     void Start()
     {
         playerController = GameObject.Find("OVRPlayerController");
         triggerLine = this.GetComponentInChildren<LineRenderer>();
+        canPlay = true;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (IsLineTriggered()) OnLineTrigger();
+        if (IsLineTriggered() && canPlay) OnLineTrigger();
     }
 
     private bool IsLineTriggered()
     {
-        return (Mathf.Abs(playerController.transform.position.z - triggerLine.transform.position.z) < TRIGGER_BUFFER) ? true : false;
+        bool triggered = (Mathf.Abs(playerController.transform.position.z - triggerLine.transform.position.z) < TRIGGER_BUFFER) ? true : false;
+        if (!triggered)
+            canPlay = true;
+        return triggered;
     }
 
     private void OnLineTrigger()
     {
+        canPlay = false;
         // play notes
         foreach (Transform layer in transform)
         {
