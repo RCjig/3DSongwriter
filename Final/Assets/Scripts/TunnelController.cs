@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TunnelController : MonoBehaviour
 {
-    readonly float SPACING = 1.5f;
+    readonly float SPACING = 3.0f;
 
     public GameObject NoteGate;
 

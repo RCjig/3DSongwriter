@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MovementController : MonoBehaviour
 {
-    readonly float MOVEMENT_SCALE = 0.1f;
+    readonly float MOVEMENT_SCALE = 0.025f;
     private ModeController modeController;
 
     // Start is called before the first frame update
@@ -14,7 +14,7 @@ public class MovementController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (modeController.GetMode().Equals("EDIT"))
         {
@@ -23,9 +23,9 @@ public class MovementController : MonoBehaviour
             Vector3 movementVector = transform.forward * moveSpeed * MOVEMENT_SCALE;
             movementVector.y = 0.0f;
             GetComponent<CharacterController>().Move(movementVector);
-            //transform.position += movementVector;
+            //transform.position += new Vector3(0.0f, 0.0f, 0.1f);
             //Debug.Log(movementVector.magnitude.ToString());
-            Debug.Log(GetComponent<CharacterController>().velocity.ToString());
+            //Debug.Log(GetComponent<CharacterController>().velocity.ToString());
         }
     }
 }
