@@ -33,7 +33,7 @@ public class TunnelController : MonoBehaviour
         NoteBlockBehavior[] noteBlockControllers = gate.GetComponentsInChildren<NoteBlockBehavior>();
         foreach (NoteBlockBehavior currController in noteBlockControllers)
             gateString = gateString + currController.GetNoteName() + " ";
-        return gateString;
+        return (gateString + "\r\n");
     }
 
 
