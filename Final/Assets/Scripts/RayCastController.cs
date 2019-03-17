@@ -17,6 +17,27 @@ public class RayCastController : MonoBehaviour
 
     private Note currNote; // the note we are currently "painting"
 
+    /* Control Flow Outline
+     * 
+     * CREATE mode: might need to edit display based on desired inputs (BPM?), controls should be done
+     *  - point at dropdown arrow or buttons and use rhand trigger
+     * 
+     * EDIT mode: display and controls mostly done
+     *  - use rindex trigger to paint blocks
+     *  - use rhand trigger to get menu input
+     *  - use ray to determine selected menu items/blocks
+     *  * TODO: add a clear button to allow us to erase notes
+     * 
+     * PLAY mode: when we toggle to this mode, I want the menu to display a start button and a BPM slider, intialized to the BPM they originally chose
+     *  - press play using the usual rhand trigger menu interaction
+     *  - once we press play, menu disappears
+     *  - legend on the side could show possible inputs
+     *      - ex: use normal movement trigger to speed up, use normal selectin trigger to pause
+     *          - on pause, the menu comes back up, with options "RESUME" and "EXIT"
+     *          - exit returns to EDIT mode
+     * 
+     */
+
     // Start is called before the first frame update
     void Start()
     {
@@ -35,6 +56,98 @@ public class RayCastController : MonoBehaviour
         RayCast();
     }
 
+    private void HandleCreateModeInputs(GameObject hitObject, bool rIndexTriggered, bool rHandTriggered)
+    {
+        if (rHandTriggered)
+        {
+            if (hitObject.name == "GateDropdown")
+            {
+                menuController.ExpandOrCollapseDropdown();
+            }
+
+            else if (hitObject.name.Contains("GateDropdown_Option_"))
+            {
+                menuController.SetDropdown(hitObject.name[hitObject.name.Length - 1] - '0' - 1);
+            }
+
+            else if (hitObject.name == "CreateButton")
+            {
+                GameObject.Find("Tunnel").GetComponent<TunnelGenerator>().CreateTunnel(menuController.GetNumberOfGates());
+            }
+
+            else if (hitObject.name == "ResetButton")
+            {
+                GameObject.Find("Tunnel").GetComponent<TunnelGenerator>().DestroyTunnel();
+            }
+        }
+    }
+
+    private void HandleNoteBlockHit (GameObject noteBlock, bool rIndexTriggered)
+    {
+        NoteBlockBehavior behaviorController = noteBlock.GetComponent<NoteBlockBehavior>();
+        behaviorController.Play();
+        if (rIndexTriggered)
+            behaviorController.AssignNote(currNote);
+    }
+
+    private void ChangeMode()
+    {
+        modeController.ChangeMode();
+    }
+
+    private void UpdateMenuController (string updateType, string input)
+    {
+        menuController.NotSet();
+        menuController.ResetButtons(updateType);
+        menuController.Enter(updateType, input);
+    }
+
+    private void HandleNoteButtonHit(GameObject hitObject)
+    {
+        string type = "";
+
+        if (hitObject.name[0] == '♭' || hitObject.name[0] == '♮' || hitObject.name[0] == '♯') type = "NOTE_MODIFIER";
+        else type = "NOTE";
+
+        UpdateMenuController(type, hitObject.name[0].ToString());
+    }
+
+    private void HandleOctaveButtonHit(GameObject hitObject)
+    {
+        UpdateMenuController("OCTAVE", hitObject.name[0].ToString());
+    }
+
+    private void HandleEditModeInputs(GameObject hitObject, bool rIndexTriggered, bool rHandTriggered)
+    {
+        if (hitObject.name.Contains("NoteBlock"))
+            HandleNoteBlockHit(hitObject, rIndexTriggered);
+
+        else if (rHandTriggered)
+        {
+            if (hitObject.name.Contains("_NoteButton"))
+                HandleNoteButtonHit(hitObject);
+
+            else if (hitObject.name.Contains("_OctaveButton"))
+                HandleOctaveButtonHit(hitObject);
+
+            else if (hitObject.name == "SetButton")
+            {
+                if (menuController.Set())
+                {
+                    string selectedNote = menuController.GetSelectedNote();
+                    Debug.Log("Looking for: " + selectedNote);
+                    this.currNote = musicBoxController.GetNote(selectedNote);
+                    Debug.Log("Setting: " + this.currNote.getName());
+                }
+            }
+        }
+    }
+
+    private bool ShouldChangeMode(GameObject hitObject, bool rHandTriggered)
+    {
+        return (hitObject.name.Equals("ChangeModeButton") && rHandTriggered);
+    }
+
     private void RayCast()
     {
         Ray ray = new Ray(rightHand.transform.position, forward);
@@ -43,76 +156,17 @@ public class RayCastController : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit))
         {
+            string mode = modeController.GetMode();
             GameObject hitObject = hit.collider.gameObject;
+            bool rIndexTriggered = OVRInput.Get(OVRInput.RawButton.RIndexTrigger);
+            bool rHandTriggered = OVRInput.GetDown(OVRInput.RawButton.RHandTrigger);
 
-            if (hitObject.name.Contains("NoteBlock"))
-                hitObject.GetComponent<NoteBlockBehavior>().Play();
-
-            if (modeController.GetMode().Equals("EDIT") && OVRInput.Get(OVRInput.RawButton.RIndexTrigger))
-            {
-                if (hitObject.name.Contains("NoteBlock"))
-                {
-                    // assign the current note to the note block
-                    hitObject.GetComponent<NoteBlockBehavior>().AssignNote(currNote);
-                }
-            }
-            else if (OVRInput.GetDown(OVRInput.RawButton.RHandTrigger))
-            { 
-                if (hitObject.name == "ChangeModeButton")
-                {
-                    modeController.ChangeMode();
-                }
-
-                else if (hitObject.name.Contains("_NoteButton"))
-                {
-                    string type = "";
-
-                    if (hitObject.name[0] == '♭' || hitObject.name[0] == '♮' || hitObject.name[0] == '♯') type = "NOTE_MODIFIER";
-                    else type = "NOTE";
-
-                    menuController.NotSet();
-                    menuController.ResetButtons(type);
-                    menuController.Enter(type, hitObject.name[0].ToString());
-                }
-
-                else if (hitObject.name.Contains("_OctaveButton"))
-                {
-                    menuController.NotSet();
-                    menuController.ResetButtons("OCTAVE");
-                    menuController.Enter("OCTAVE", hitObject.name[0].ToString());
-                }
-
-                else if (hitObject.name == "SetButton")
-                {
-                    if (menuController.Set())
-                    {
-                        string selectedNote = menuController.GetSelectedNote();
-                        Debug.Log("Looking for: " + selectedNote);
-                        this.currNote = musicBoxController.GetNote(selectedNote);
-                        Debug.Log("Setting: " + this.currNote.getName());
-                    }
-                }
-
-                else if (hitObject.name == "GateDropdown")
-                {
-                    menuController.ExpandOrCollapseDropdown();
-                }
-
-                else if (hitObject.name.Contains("GateDropdown_Option_"))
-                {
-                    menuController.SetDropdown(hitObject.name[hitObject.name.Length-1] - '0' - 1);
-                }
-
-                else if (hitObject.name == "CreateButton")
-                {
-                    GameObject.Find("Tunnel").GetComponent<TunnelGenerator>().CreateTunnel(menuController.GetNumberOfGates());
-                }
-
-                else if (hitObject.name == "ResetButton")
-                {
-                    GameObject.Find("Tunnel").GetComponent<TunnelGenerator>().DestroyTunnel();
-                }
-            }
+            if (ShouldChangeMode(hitObject, rHandTriggered))
+                ChangeMode();
+            else if (mode.Equals("EDIT"))
+                HandleEditModeInputs(hitObject, rIndexTriggered, rHandTriggered);
+            else if (mode.Equals("CREATE"))
+                HandleCreateModeInputs(hitObject, rIndexTriggered, rHandTriggered);
         }
     }
 }
