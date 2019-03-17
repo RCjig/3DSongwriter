@@ -13,6 +13,7 @@ public class ModeController : MonoBehaviour
     public Text modeText;
 
     private MODE mode;
+    private bool firstPlay;
 
     // Start is called before the first frame update
     void Start()
@@ -20,6 +21,7 @@ public class ModeController : MonoBehaviour
         mode = MODE.CREATE;
         modeText.text = mode.ToString();
         modeText.color = Color.white;
+        firstPlay = false;
     }
 
     // Update is called once per frame
@@ -43,6 +45,7 @@ public class ModeController : MonoBehaviour
             modeText.color = Color.red;
             editMenu.SetActive(false);
             playMenu.SetActive(true);
+            firstPlay = true;
         }
         else
         {
@@ -50,6 +53,7 @@ public class ModeController : MonoBehaviour
             modeText.color = Color.white;
             playMenu.SetActive(false);
             createMenu.SetActive(true);
+            firstPlay = false;
         }
 
         modeText.text = mode.ToString();
@@ -58,5 +62,15 @@ public class ModeController : MonoBehaviour
     public string GetMode()
     {
         return mode.ToString();
+    }
+
+    public bool IsFirstPlay()
+    {
+        return firstPlay;
+    }
+    
+    public void SetFirstPlay()
+    {
+        firstPlay = false;
     }
 }

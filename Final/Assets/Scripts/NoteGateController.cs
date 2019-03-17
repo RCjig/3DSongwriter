@@ -25,9 +25,26 @@ public class NoteGateController : MonoBehaviour
         if (IsLineTriggered() && canPlay) OnLineTrigger();
     }
 
+    public void PlayOnce()
+    {
+        if (IsInLine()) PlayGate();
+    }
+
+    private void PlayGate()
+    {
+        foreach (Transform layer in transform)
+        {
+            if (layer.tag != "GateLayer") continue;
+            foreach (Transform noteBlock in layer.transform)
+            {
+                noteBlock.gameObject.GetComponent<NoteBlockBehavior>().Play();
+            }
+        }
+    }
+
     private bool IsLineTriggered()
     {
-        bool triggered = (Mathf.Abs(playerController.transform.position.z - triggerLine.transform.position.z) < TRIGGER_BUFFER) ? true : false;
+        bool triggered = IsInLine();
         if (!triggered)
             canPlay = true;
         return triggered;
@@ -37,13 +54,11 @@ public class NoteGateController : MonoBehaviour
     {
         canPlay = false;
         // play notes
-        foreach (Transform layer in transform)
-        {
-            if (layer.tag != "GateLayer") continue;
-            foreach (Transform noteBlock in layer.transform)
-            {
-                noteBlock.gameObject.GetComponent<NoteBlockBehavior>().Play();
-            }
-        }
+        PlayGate();
+    }
+
+    private bool IsInLine()
+    {
+        return Mathf.Abs(playerController.transform.position.z - triggerLine.transform.position.z) < TRIGGER_BUFFER;
     }
 }

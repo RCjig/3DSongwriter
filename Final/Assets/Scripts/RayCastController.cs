@@ -11,7 +11,9 @@ public class RayCastController : MonoBehaviour
     private GameObject rightHand; // for ray cast position
     private ModeController modeController;
     private MenuController menuController;
+    private MovementController movementController;
     private MusicBoxController musicBoxController;
+    private TunnelController tunnelController;
     private Vector3 forward;
     private Vector3 up;
     private bool canPaint;
@@ -46,7 +48,9 @@ public class RayCastController : MonoBehaviour
         avatar = gameObject.GetComponentInParent<OvrAvatar>();
         modeController = GameObject.Find("LogicController").GetComponent<ModeController>();
         menuController = GameObject.Find("LogicController").GetComponent<MenuController>();
+        movementController = GameObject.Find("OVRPlayerController").GetComponent<MovementController>();
         musicBoxController = MusicBox.GetComponent<MusicBoxController>();
+        tunnelController = GameObject.Find("Tunnel").GetComponent<TunnelController>();
         currNote = musicBoxController.GetNote("N♮N");
         canPaint = false;
     }
@@ -74,19 +78,24 @@ public class RayCastController : MonoBehaviour
 
             else if (hitObject.name == "CreateButton")
             {
-                GameObject.Find("Tunnel").GetComponent<TunnelController>().CreateTunnel(menuController.GetNumberOfGates());
+                tunnelController.CreateTunnel(menuController.GetNumberOfGates());
             }
 
             else if (hitObject.name == "ResetButton")
             {
-                GameObject.Find("Tunnel").GetComponent<TunnelController>().WriteToFile();
-                //GameObject.Find("Tunnel").GetComponent<TunnelController>().DestroyTunnel();
+                tunnelController.DestroyTunnel();
+            }
+            else if (hitObject.name == "LoadButton")
+            {
+                //tunnelController.WriteToFile();
             }
         }
     }
 
     private void HandleNoteBlockHit (GameObject noteBlock, bool rIndexTriggered)
     {
+        if (movementController.GetIsPlaying()) return;
+
         NoteBlockBehavior behaviorController = noteBlock.GetComponent<NoteBlockBehavior>();
         behaviorController.Play();
         if (canPaint && rIndexTriggered)
@@ -141,7 +150,12 @@ public class RayCastController : MonoBehaviour
 
             else if (hitObject.name == "PlayGateButton")
             {
-
+                tunnelController.PlayGates();
+            }
+            
+            else if (hitObject.name == "SaveButton")
+            {
+                //tunnelController.WriteToFile();
             }
 
             else if (hitObject.name == "SetButton")
@@ -149,11 +163,31 @@ public class RayCastController : MonoBehaviour
                 if (menuController.Set())
                 {
                     string selectedNote = menuController.GetSelectedNote();
-                    Debug.Log("Looking for: " + selectedNote);
+                    //Debug.Log("Looking for: " + selectedNote);
                     this.currNote = musicBoxController.GetNote(selectedNote);
-                    Debug.Log("Setting: " + this.currNote.getName());
+                    //Debug.Log("Setting: " + this.currNote.getName());
                     canPaint = true;
                 }
+            }
+        }
+    }
+
+    private void HandlePlayModeInputs(GameObject hitObject, bool rIndexTriggered, bool rHandTriggered)
+    {
+        if (rIndexTriggered)
+        {
+            menuController.Pause();
+        }
+
+        else if (rHandTriggered)
+        {
+            if (hitObject.name == "PlayButton")
+            {
+                menuController.Play();
+            }
+            else if (hitObject.name == "ResetButton")
+            {
+                menuController.Reset();
             }
         }
     }
@@ -182,6 +216,8 @@ public class RayCastController : MonoBehaviour
                 HandleEditModeInputs(hitObject, rIndexTriggered, rHandTriggered);
             else if (mode.Equals("CREATE"))
                 HandleCreateModeInputs(hitObject, rIndexTriggered, rHandTriggered);
+            else if (mode.Equals("PLAY"))
+                HandlePlayModeInputs(hitObject, rIndexTriggered, rHandTriggered);
         }
     }
 }

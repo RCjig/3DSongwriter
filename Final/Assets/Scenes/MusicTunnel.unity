@@ -126,7 +126,7 @@ GameObject:
   - component: {fileID: 509024}
   - component: {fileID: 509023}
   m_Layer: 0
-  m_Name: PlayOrRestartButton
+  m_Name: PlayButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -145,7 +145,7 @@ RectTransform:
   m_Children:
   - {fileID: 1042168736}
   m_Father: {fileID: 843463776}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1177,7 +1177,7 @@ GameObject:
   - component: {fileID: 183633687}
   - component: {fileID: 183633686}
   m_Layer: 0
-  m_Name: ResumeButton
+  m_Name: ResetButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1196,7 +1196,7 @@ RectTransform:
   m_Children:
   - {fileID: 1852121450}
   m_Father: {fileID: 843463776}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1392,6 +1392,85 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0b3504c2e158344cace5c8347a174b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &223849207
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 223849208}
+  - component: {fileID: 223849210}
+  - component: {fileID: 223849209}
+  m_Layer: 0
+  m_Name: PauseText
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &223849208
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 223849207}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.0019999999, y: 0.0019999999, z: 0.0019999999}
+  m_Children: []
+  m_Father: {fileID: 843463776}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0.0399, y: -0.0371}
+  m_SizeDelta: {x: -25, y: -75}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &223849209
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 223849207}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 12
+    m_FontStyle: 0
+    m_BestFit: 1
+    m_MinSize: 1
+    m_MaxSize: 40
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 1
+    m_VerticalOverflow: 1
+    m_LineSpacing: 1
+  m_Text: "Press the right index trigger \nto pause at anytime"
+--- !u!222 &223849210
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 223849207}
+  m_CullTransparentMesh: 0
 --- !u!1 &243330412
 GameObject:
   m_ObjectHideFlags: 0
@@ -3924,6 +4003,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 223849208}
   - {fileID: 509022}
   - {fileID: 183633685}
   m_Father: {fileID: 1342663534}
@@ -6254,6 +6334,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8efb9d3dd3f69204bb1bbc34692761dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  menu: {fileID: 1342663533}
   keypadButtons:
   - {fileID: 1538268380}
   - {fileID: 1442408902}
@@ -6278,6 +6359,8 @@ MonoBehaviour:
   - {fileID: 2095501098}
   dropdownButton: {fileID: 1737309504}
   playGateButton: {fileID: 40446908}
+  playButton: {fileID: 509024}
+  resetButton: {fileID: 183633687}
 --- !u!1 &1564388660
 GameObject:
   m_ObjectHideFlags: 0
@@ -7021,6 +7104,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NoteGate: {fileID: 2131201424784663637, guid: 182753169e6d7ba4aa6a987cd28ead38,
     type: 3}
+  loadFile: {fileID: 0}
+  MusicBox: {fileID: 0}
 --- !u!4 &1791586490
 Transform:
   m_ObjectHideFlags: 0
@@ -7184,7 +7269,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Resume
+  m_Text: Reset
 --- !u!222 &1852121452
 CanvasRenderer:
   m_ObjectHideFlags: 0

@@ -5,12 +5,18 @@ using UnityEngine;
 public class MovementController : MonoBehaviour
 {
     readonly float MOVEMENT_SCALE = 0.025f;
+    readonly Vector3 PLAY_MOVEMENT_VECTOR = new Vector3(0.0f, 0.0f, 0.05f);
+
     private ModeController modeController;
+    private Vector3 startPosition;
+    private bool isPlaying;
 
     // Start is called before the first frame update
     void Start()
     {
         modeController = GameObject.Find("LogicController").GetComponent<ModeController>();
+        startPosition = transform.position;
+        isPlaying = false;
     }
 
     // Update is called once per frame
@@ -27,5 +33,25 @@ public class MovementController : MonoBehaviour
             //Debug.Log(movementVector.magnitude.ToString());
             //Debug.Log(GetComponent<CharacterController>().velocity.ToString());
         }
+        else if (modeController.GetMode().Equals("PLAY"))
+        {
+            if (isPlaying)
+                GetComponent<CharacterController>().Move(PLAY_MOVEMENT_VECTOR);
+        }
+    }
+    
+    public void ResetPosition()
+    {
+        transform.position = startPosition;
+    }
+
+    public void SetIsPlaying(bool newIsPlaying)
+    {
+        isPlaying = newIsPlaying;
+    }
+
+    public bool GetIsPlaying()
+    {
+        return isPlaying;
     }
 }

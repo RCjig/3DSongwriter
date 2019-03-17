@@ -126,4 +126,10 @@ public class TunnelController : MonoBehaviour
             Destroy(noteGate);
         }
     }
+
+    public void PlayGates()
+    {
+        foreach (GameObject noteGate in noteGates)
+            noteGate.GetComponent<NoteGateController>().PlayOnce();
+    }
 }

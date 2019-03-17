@@ -14,17 +14,24 @@ public class MenuController : MonoBehaviour
     readonly int CLEAR_END_INDEX = 15;
     readonly string ARROW = " ▼";
 
+    public GameObject menu;
     public Button[] keypadButtons;
     public Button[] dropdownButtonOptions;
     public Button dropdownButton;
     public Button playGateButton;
+    public Button playButton;
+    public Button resetButton;
 
+    private MovementController movementController;
+    private ModeController modeController;
     private bool isSet;
     private bool isExpanded;
 
     // Start is called before the first frame update
     void Start()
     {
+        movementController = GameObject.Find("OVRPlayerController").GetComponent<MovementController>();
+        modeController = GameObject.Find("LogicController").GetComponent<ModeController>();
         isSet = false;
         isExpanded = false;
 
@@ -206,6 +213,26 @@ public class MenuController : MonoBehaviour
     {
         dropdownButton.GetComponentInChildren<Text>().text = dropdownButtonOptions[index].GetComponentInChildren<Text>().text + ARROW;
         ExpandOrCollapseDropdown();
+    }
+
+    public void Play()
+    {
+        if (modeController.IsFirstPlay())
+            movementController.ResetPosition();
+
+        movementController.SetIsPlaying(true);
+        menu.SetActive(false);
+    }
+
+    public void Reset()
+    {
+        movementController.ResetPosition();
+        movementController.SetIsPlaying(false);
+    }
+
+    public void Pause()
+    {
+        menu.SetActive(true);
     }
 
     private bool IsNoteSet()
