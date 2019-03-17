@@ -10,11 +10,14 @@ public class MenuController : MonoBehaviour
     readonly int OCTAVE_INDEX = 2;
     readonly int NOTES_END_INDEX = 7;
     readonly int NOTE_MODIFIERS_END_INDEX = 10;
+    readonly int OCTAVE_END_INDEX = 14;
+    readonly int CLEAR_END_INDEX = 15;
     readonly string ARROW = " ▼";
 
     public Button[] keypadButtons;
     public Button[] dropdownButtonOptions;
     public Button dropdownButton;
+    public Button playGateButton;
 
     private bool isSet;
     private bool isExpanded;
@@ -44,6 +47,14 @@ public class MenuController : MonoBehaviour
         int valid = 0;
         int start = 0;
         int end = 0;
+
+        if (keypadButtons[CLEAR_END_INDEX-1].colors.normalColor == Color.red)
+        {
+            ColorBlock cb = keypadButtons[CLEAR_END_INDEX - 1].colors;
+            cb.normalColor = Color.green;
+            keypadButtons[CLEAR_END_INDEX - 1].colors = cb;
+            return true;
+        }
 
         SetStartAndEnd("NOTE", ref start, ref end);
         for (int i = start; i < end; i++)
@@ -116,6 +127,21 @@ public class MenuController : MonoBehaviour
 
     public void ResetButtons(string type)
     {
+        if (type == "CLEAR")
+        {
+            for (int i = 0; i < keypadButtons.Length; i++)
+            {
+                ColorBlock cb = keypadButtons[i].colors;
+                cb.normalColor = Color.white;
+                keypadButtons[i].colors = cb;
+            }
+            return;
+        }
+
+        ColorBlock clearCB = keypadButtons[CLEAR_END_INDEX - 1].colors;
+        clearCB.normalColor = Color.white;
+        keypadButtons[CLEAR_END_INDEX - 1].colors = clearCB;
+
         int start = 0;
         int end = 0;
         SetStartAndEnd(type, ref start, ref end);
@@ -145,6 +171,8 @@ public class MenuController : MonoBehaviour
         string noteName = "N";
         string noteModifier = "♮";
         string octave = "N";
+
+        if (keypadButtons[CLEAR_END_INDEX - 1].colors.normalColor == Color.green) return "CLR";
 
         for (int i = 0; i < keypadButtons.Length; i++)
         {
@@ -208,10 +236,15 @@ public class MenuController : MonoBehaviour
             start = NOTES_END_INDEX;
             end = NOTE_MODIFIERS_END_INDEX;
         }
-        else
+        else if (type == "OCTAVE")
         {
             start = NOTE_MODIFIERS_END_INDEX;
-            end = keypadButtons.Length;
+            end = OCTAVE_END_INDEX;
+        }
+        else
+        {
+            start = OCTAVE_END_INDEX;
+            end = CLEAR_END_INDEX;
         }
     }
 }

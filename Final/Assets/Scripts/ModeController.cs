@@ -9,6 +9,7 @@ public class ModeController : MonoBehaviour
 
     public GameObject createMenu;
     public GameObject editMenu;
+    public GameObject playMenu;
     public Text modeText;
 
     private MODE mode;
@@ -41,11 +42,13 @@ public class ModeController : MonoBehaviour
             mode = MODE.PLAY;
             modeText.color = Color.red;
             editMenu.SetActive(false);
+            playMenu.SetActive(true);
         }
         else
         {
             mode = MODE.CREATE;
             modeText.color = Color.white;
+            playMenu.SetActive(false);
             createMenu.SetActive(true);
         }
 

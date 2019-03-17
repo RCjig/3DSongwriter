@@ -14,6 +14,7 @@ public class RayCastController : MonoBehaviour
     private MusicBoxController musicBoxController;
     private Vector3 forward;
     private Vector3 up;
+    private bool canPaint;
 
     private Note currNote; // the note we are currently "painting"
 
@@ -47,6 +48,7 @@ public class RayCastController : MonoBehaviour
         menuController = GameObject.Find("LogicController").GetComponent<MenuController>();
         musicBoxController = MusicBox.GetComponent<MusicBoxController>();
         currNote = musicBoxController.GetNote("N♮N");
+        canPaint = false;
     }
 
     // Update is called once per frame
@@ -87,7 +89,7 @@ public class RayCastController : MonoBehaviour
     {
         NoteBlockBehavior behaviorController = noteBlock.GetComponent<NoteBlockBehavior>();
         behaviorController.Play();
-        if (rIndexTriggered)
+        if (canPaint && rIndexTriggered)
             behaviorController.AssignNote(currNote);
     }
 
@@ -98,6 +100,7 @@ public class RayCastController : MonoBehaviour
 
     private void UpdateMenuController (string updateType, string input)
     {
+        canPaint = false;
         menuController.NotSet();
         menuController.ResetButtons(updateType);
         menuController.Enter(updateType, input);
@@ -131,6 +134,16 @@ public class RayCastController : MonoBehaviour
             else if (hitObject.name.Contains("_OctaveButton"))
                 HandleOctaveButtonHit(hitObject);
 
+            else if (hitObject.name == "ClearButton")
+            {
+                UpdateMenuController("CLEAR", "Clear");
+            }
+
+            else if (hitObject.name == "PlayGateButton")
+            {
+
+            }
+
             else if (hitObject.name == "SetButton")
             {
                 if (menuController.Set())
@@ -139,6 +152,7 @@ public class RayCastController : MonoBehaviour
                     Debug.Log("Looking for: " + selectedNote);
                     this.currNote = musicBoxController.GetNote(selectedNote);
                     Debug.Log("Setting: " + this.currNote.getName());
+                    canPaint = true;
                 }
             }
         }
