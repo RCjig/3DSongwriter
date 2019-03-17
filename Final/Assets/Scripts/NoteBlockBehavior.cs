@@ -10,6 +10,7 @@ public class NoteBlockBehavior : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        note = GameObject.Find("MusicBox").GetComponent<MusicBoxController>().GetNote("NNN");
         audioSource = this.GetComponent<AudioSource>();
     }
 
@@ -17,6 +18,11 @@ public class NoteBlockBehavior : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public string GetNoteName()
+    {
+        return note.getName();
     }
 
     private bool HasNote()

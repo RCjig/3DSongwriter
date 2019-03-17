@@ -76,7 +76,6 @@ public class MusicBoxController : MonoBehaviour
                 return notes[i];
         }
         // return the default note
-        Debug.Log("RETURNING DEFAULT NOTE");
         return notes[notes.Length - 1];
     }
 }
