@@ -7104,8 +7104,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NoteGate: {fileID: 2131201424784663637, guid: 182753169e6d7ba4aa6a987cd28ead38,
     type: 3}
-  loadFile: {fileID: 0}
-  MusicBox: {fileID: 0}
+  loadFile: {fileID: 4900000, guid: bf3c88c5f71d5804f9a14203e2644b19, type: 3}
+  MusicBox: {fileID: 368823304}
 --- !u!4 &1791586490
 Transform:
   m_ObjectHideFlags: 0

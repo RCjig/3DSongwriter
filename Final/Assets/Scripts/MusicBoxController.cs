@@ -47,6 +47,9 @@ public class MusicBoxController : MonoBehaviour
 
     private bool SameNote (string musicBoxNote, string inputNote)
     {
+        // note names should have length three: note, modifier, and octave
+        if (inputNote.Length != 3) return false;
+
         string compareTo = inputNote;
         char octave = inputNote[2];
 
