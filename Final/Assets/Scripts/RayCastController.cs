@@ -87,7 +87,7 @@ public class RayCastController : MonoBehaviour
             }
             else if (hitObject.name == "LoadButton")
             {
-                //tunnelController.WriteToFile();
+                tunnelController.LoadFromFile();
             }
         }
     }
@@ -155,7 +155,7 @@ public class RayCastController : MonoBehaviour
             
             else if (hitObject.name == "SaveButton")
             {
-                //tunnelController.WriteToFile();
+                tunnelController.WriteToFile();
             }
 
             else if (hitObject.name == "SetButton")

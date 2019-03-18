@@ -31,9 +31,10 @@ public class TunnelController : MonoBehaviour
     {
         string gateString = "";
         NoteBlockBehavior[] noteBlockControllers = gate.GetComponentsInChildren<NoteBlockBehavior>();
+        Debug.Log(noteBlockControllers.Length);
         foreach (NoteBlockBehavior currController in noteBlockControllers)
             gateString = gateString + currController.GetNoteName() + " ";
-        return (gateString + "\r\n");
+        return (gateString); // + "\r\n");
     }
 
 
@@ -47,30 +48,37 @@ public class TunnelController : MonoBehaviour
         for (int i = 0; i < lines.Length; i++)
         {
             GameObject currGate = noteGates[i];
-            NoteBlockBehavior[] currNoteBlocks = currGate.GetComponents<NoteBlockBehavior>();
+            NoteBlockBehavior[] currNoteBlocks = currGate.GetComponentsInChildren<NoteBlockBehavior>();
             string[] notes = lines[i].Split(' ');
             for (int j = 0; j < notes.Length && j < currNoteBlocks.Length; j++)
             {
                 string currName = currNoteBlocks[j].name;
                 Debug.Log(currName);
-                currNoteBlocks[j].AssignNote(musicBoxController.GetNote((notes[int.Parse((currName.Split('_')[1]))])));
+                if (!currNoteBlocks[j].IsInitialized()) currNoteBlocks[j].InitVars();
+                string noteName = notes[int.Parse((currName.Split('_')[1]))];
+                Debug.Log(noteName);
+                currNoteBlocks[j].AssignNote(musicBoxController.GetNote(noteName));
             }
         }
     }
 
     public void WriteToFile ()
     {
-        string serializedData = "";
-        foreach (GameObject gate in noteGates)
-            serializedData = serializedData + GateToString(gate);
-
+        // Write to disk
         string path = Application.dataPath.ToString() + @"/Saved/Save.txt";
+        StreamWriter writer = new StreamWriter(path, false);
+
+        //string serializedData = "";
+        foreach (GameObject gate in noteGates)
+            writer.WriteLine(GateToString(gate));
+            //serializedData = serializedData + GateToString(gate);
+
         Debug.Log("PATH: " + path);
-        Debug.Log(serializedData);
+        //Debug.Log(serializedData);
 
         // Write to disk
-        StreamWriter writer = new StreamWriter(path, false);
-        writer.Write(serializedData);
+        //StreamWriter writer = new StreamWriter(path, false);
+       // writer.Write(serializedData);
 
         /* Read
         StreamReader reader = new StreamReader("MyPath.txt");
