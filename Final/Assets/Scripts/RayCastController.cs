@@ -87,6 +87,7 @@ public class RayCastController : MonoBehaviour
             }
             else if (hitObject.name == "LoadButton")
             {
+                menuController.StartTimedButtonHighlight("LOAD");
                 tunnelController.LoadFromFile();
             }
         }

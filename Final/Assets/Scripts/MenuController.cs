@@ -22,8 +22,8 @@ public class MenuController : MonoBehaviour
     public Button playButton;
     public Button resetButton;
     public Button saveButton;
+    public Button loadButton;
 
-    private Button highlightedButton;
     private MovementController movementController;
     private ModeController modeController;
     private bool isSet;
@@ -181,14 +181,17 @@ public class MenuController : MonoBehaviour
 
     public void StartTimedButtonHighlight(string type)
     {
+        Button button = playGateButton;
         if (type == "PLAY_GATE")
-            highlightedButton = playGateButton;
-        else // if (type == "SAVE")
-            highlightedButton = saveButton;
+            button = playGateButton;
+        else if (type == "SAVE")
+            button = saveButton;
+        else if (type == "LOAD")
+            button = loadButton;
 
-        ColorBlock cb = highlightedButton.colors;
+        ColorBlock cb = button.colors;
         cb.normalColor = Color.green;
-        highlightedButton.colors = cb;
+        button.colors = cb;
         isHighlightTimerOn = true;
         highlightTimer = Time.time;
     }
@@ -298,14 +301,27 @@ public class MenuController : MonoBehaviour
 
     private void TimedButtonHighlight()
     {
-        if (Time.time - highlightTimer > 1.0f)
+        Button button;
+        ColorBlock cb;
+
+        if (Time.time - highlightTimer > 3.0f)
         {
-            Button button = playGateButton;
-            ColorBlock cb = button.colors;
+            button = playGateButton;
+            cb = button.colors;
             cb.normalColor = Color.white;
             button.colors = cb;
-        }
 
-        isHighlightTimerOn = false;
+            button = saveButton;
+            cb = button.colors;
+            cb.normalColor = Color.white;
+            button.colors = cb;
+
+            button = loadButton;
+            cb = button.colors;
+            cb.normalColor = Color.white;
+            button.colors = cb;
+
+            isHighlightTimerOn = false;
+        }
     }
 }

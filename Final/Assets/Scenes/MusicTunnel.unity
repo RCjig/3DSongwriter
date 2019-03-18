@@ -6361,6 +6361,8 @@ MonoBehaviour:
   playGateButton: {fileID: 40446908}
   playButton: {fileID: 509024}
   resetButton: {fileID: 183633687}
+  saveButton: {fileID: 243330415}
+  loadButton: {fileID: 807719681}
 --- !u!1 &1564388660
 GameObject:
   m_ObjectHideFlags: 0

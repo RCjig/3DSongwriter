@@ -32,8 +32,12 @@ public class TunnelController : MonoBehaviour
         string gateString = "";
         NoteBlockBehavior[] noteBlockControllers = gate.GetComponentsInChildren<NoteBlockBehavior>();
         Debug.Log(noteBlockControllers.Length);
-        foreach (NoteBlockBehavior currController in noteBlockControllers)
-            gateString = gateString + currController.GetNoteName() + " ";
+        for (int i = 0; i < noteBlockControllers.Length; i++)
+        {
+            gateString = gateString + noteBlockControllers[i].GetNoteName() + " ";
+        }
+        //foreach (NoteBlockBehavior currController in noteBlockControllers)
+        //    gateString = gateString + currController.GetNoteName() + " ";
         return (gateString); // + "\r\n");
     }
 
@@ -69,8 +73,12 @@ public class TunnelController : MonoBehaviour
         StreamWriter writer = new StreamWriter(path, false);
 
         //string serializedData = "";
-        foreach (GameObject gate in noteGates)
-            writer.WriteLine(GateToString(gate));
+        for (int i = 0; i < noteGates.Length; i++)
+        {
+            writer.WriteLine(GateToString(noteGates[i]));
+        }
+        //foreach (GameObject gate in noteGates)
+        //    writer.WriteLine(GateToString(gate));
             //serializedData = serializedData + GateToString(gate);
 
         Debug.Log("PATH: " + path);
