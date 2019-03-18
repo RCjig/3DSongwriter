@@ -21,11 +21,15 @@ public class MenuController : MonoBehaviour
     public Button playGateButton;
     public Button playButton;
     public Button resetButton;
+    public Button saveButton;
 
+    private Button highlightedButton;
     private MovementController movementController;
     private ModeController modeController;
     private bool isSet;
     private bool isExpanded;
+    private bool isHighlightTimerOn;
+    private float highlightTimer;
 
     // Start is called before the first frame update
     void Start()
@@ -34,6 +38,8 @@ public class MenuController : MonoBehaviour
         modeController = GameObject.Find("LogicController").GetComponent<ModeController>();
         isSet = false;
         isExpanded = false;
+        isHighlightTimerOn = false;
+        highlightTimer = 0.0f;
 
         foreach (var button in dropdownButtonOptions)
         {
@@ -44,7 +50,7 @@ public class MenuController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (isHighlightTimerOn) TimedButtonHighlight();
     }
 
     public bool Set()
@@ -173,6 +179,20 @@ public class MenuController : MonoBehaviour
         }
     }
 
+    public void StartTimedButtonHighlight(string type)
+    {
+        if (type == "PLAY_GATE")
+            highlightedButton = playGateButton;
+        else // if (type == "SAVE")
+            highlightedButton = saveButton;
+
+        ColorBlock cb = highlightedButton.colors;
+        cb.normalColor = Color.green;
+        highlightedButton.colors = cb;
+        isHighlightTimerOn = true;
+        highlightTimer = Time.time;
+    }
+
     public string GetSelectedNote()
     {
         string noteName = "N";
@@ -220,8 +240,8 @@ public class MenuController : MonoBehaviour
         if (modeController.IsFirstPlay())
             movementController.ResetPosition();
 
-        movementController.SetIsPlaying(true);
         menu.SetActive(false);
+        movementController.SetIsPlaying(true);
     }
 
     public void Reset()
@@ -233,6 +253,7 @@ public class MenuController : MonoBehaviour
     public void Pause()
     {
         menu.SetActive(true);
+        movementController.SetIsPlaying(false);
     }
 
     private bool IsNoteSet()
@@ -273,5 +294,18 @@ public class MenuController : MonoBehaviour
             start = OCTAVE_END_INDEX;
             end = CLEAR_END_INDEX;
         }
+    }
+
+    private void TimedButtonHighlight()
+    {
+        if (Time.time - highlightTimer > 1.0f)
+        {
+            Button button = playGateButton;
+            ColorBlock cb = button.colors;
+            cb.normalColor = Color.white;
+            button.colors = cb;
+        }
+
+        isHighlightTimerOn = false;
     }
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 public class MovementController : MonoBehaviour
 {
     readonly float MOVEMENT_SCALE = 0.025f;
-    readonly Vector3 PLAY_MOVEMENT_VECTOR = new Vector3(0.0f, 0.0f, 0.05f);
+    readonly Vector3 PLAY_MOVEMENT_VECTOR = new Vector3(0.0f, 0.0f, 0.025f);
 
     private ModeController modeController;
     private Vector3 startPosition;

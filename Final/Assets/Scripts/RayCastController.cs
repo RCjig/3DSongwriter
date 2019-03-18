@@ -150,11 +150,13 @@ public class RayCastController : MonoBehaviour
 
             else if (hitObject.name == "PlayGateButton")
             {
+                menuController.StartTimedButtonHighlight("PLAY_GATE");
                 tunnelController.PlayGates();
             }
             
             else if (hitObject.name == "SaveButton")
             {
+                menuController.StartTimedButtonHighlight("SAVE");
                 //tunnelController.WriteToFile();
             }
 
@@ -171,24 +173,32 @@ public class RayCastController : MonoBehaviour
             }
         }
     }
-
     private void HandlePlayModeInputs(GameObject hitObject, bool rIndexTriggered, bool rHandTriggered)
     {
         if (rIndexTriggered)
-        {
-            menuController.Pause();
-        }
-
+            HandlePlayModePauseInput();
         else if (rHandTriggered)
+            HandlePlayModeMenuInput(hitObject);
+    }
+
+    private void HandlePlayModePauseInput()
+    {
+        menuController.Pause();
+        transform.GetChild(0).gameObject.SetActive(true);
+    }
+
+    private void HandlePlayModeMenuInput(GameObject hitObject)
+    {
+        if (hitObject == null) return;
+
+        else if (hitObject.name == "PlayButton")
         {
-            if (hitObject.name == "PlayButton")
-            {
-                menuController.Play();
-            }
-            else if (hitObject.name == "ResetButton")
-            {
-                menuController.Reset();
-            }
+            menuController.Play();
+            transform.GetChild(0).gameObject.SetActive(false);
+        }
+        else if (hitObject.name == "ResetButton")
+        {
+            menuController.Reset();
         }
     }
 
@@ -199,16 +209,17 @@ public class RayCastController : MonoBehaviour
 
     private void RayCast()
     {
+        string mode = modeController.GetMode();
+        bool rIndexTriggered = OVRInput.Get(OVRInput.RawButton.RIndexTrigger);
+        bool rHandTriggered = OVRInput.GetDown(OVRInput.RawButton.RHandTrigger);
+
         Ray ray = new Ray(rightHand.transform.position, forward);
         Debug.DrawRay(rightHand.transform.position, forward, Color.green);
         RaycastHit hit;
 
         if (Physics.Raycast(ray, out hit))
         {
-            string mode = modeController.GetMode();
             GameObject hitObject = hit.collider.gameObject;
-            bool rIndexTriggered = OVRInput.Get(OVRInput.RawButton.RIndexTrigger);
-            bool rHandTriggered = OVRInput.GetDown(OVRInput.RawButton.RHandTrigger);
 
             if (ShouldChangeMode(hitObject, rHandTriggered))
                 ChangeMode();
@@ -219,5 +230,8 @@ public class RayCastController : MonoBehaviour
             else if (mode.Equals("PLAY"))
                 HandlePlayModeInputs(hitObject, rIndexTriggered, rHandTriggered);
         }
+
+        else if (mode.Equals("PLAY"))
+            HandlePlayModeInputs(null, rIndexTriggered, rHandTriggered);
     }
 }
