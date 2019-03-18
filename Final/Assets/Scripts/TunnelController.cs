@@ -31,25 +31,24 @@ public class TunnelController : MonoBehaviour
     {
         string gateString = "";
         NoteBlockBehavior[] noteBlockControllers = gate.GetComponentsInChildren<NoteBlockBehavior>();
-        Debug.Log(noteBlockControllers.Length);
-        for (int i = 0; i < noteBlockControllers.Length; i++)
-        {
-            gateString = gateString + noteBlockControllers[i].GetNoteName() + " ";
-        }
-        //foreach (NoteBlockBehavior currController in noteBlockControllers)
-        //    gateString = gateString + currController.GetNoteName() + " ";
-        return (gateString); // + "\r\n");
+
+        foreach (NoteBlockBehavior currController in noteBlockControllers)
+            gateString = gateString + currController.GetNoteName() + " ";
+
+        return gateString;
     }
 
 
     // this does not work yet and we need to write the number of lines if we can't make the newline character work
     public void LoadFromFile ()
     {
+        if (hasBeenCreated) return;
+
         //Read the text from directly from the test.txt file
         string[] lines = loadFile.text.Split('\n');
-        CreateTunnel(lines.Length);
+        CreateTunnel(lines.Length - 1);
         MusicBoxController musicBoxController = MusicBox.GetComponent<MusicBoxController>();
-        for (int i = 0; i < lines.Length; i++)
+        for (int i = 0; i < lines.Length - 1; i++)
         {
             GameObject currGate = noteGates[i];
             NoteBlockBehavior[] currNoteBlocks = currGate.GetComponentsInChildren<NoteBlockBehavior>();
@@ -57,10 +56,8 @@ public class TunnelController : MonoBehaviour
             for (int j = 0; j < notes.Length && j < currNoteBlocks.Length; j++)
             {
                 string currName = currNoteBlocks[j].name;
-                Debug.Log(currName);
                 if (!currNoteBlocks[j].IsInitialized()) currNoteBlocks[j].InitVars();
                 string noteName = notes[int.Parse((currName.Split('_')[1]))];
-                Debug.Log(noteName);
                 currNoteBlocks[j].AssignNote(musicBoxController.GetNote(noteName));
             }
         }
@@ -71,18 +68,11 @@ public class TunnelController : MonoBehaviour
         // Write to disk
         string path = Application.dataPath.ToString() + @"/Saved/Save.txt";
         StreamWriter writer = new StreamWriter(path, false);
+        writer.AutoFlush = true;
 
-        //string serializedData = "";
-        for (int i = 0; i < noteGates.Length; i++)
-        {
-            writer.WriteLine(GateToString(noteGates[i]));
-        }
-        //foreach (GameObject gate in noteGates)
-        //    writer.WriteLine(GateToString(gate));
+        foreach (GameObject gate in noteGates)
+            writer.WriteLine(GateToString(gate));
             //serializedData = serializedData + GateToString(gate);
-
-        Debug.Log("PATH: " + path);
-        //Debug.Log(serializedData);
 
         // Write to disk
         //StreamWriter writer = new StreamWriter(path, false);
