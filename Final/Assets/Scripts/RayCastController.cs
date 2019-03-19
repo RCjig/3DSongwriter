@@ -253,19 +253,22 @@ public class RayCastController : MonoBehaviour
 
         if (hits.Length > 0)
         {
-            GameObject hitObject = NearestHitObject(hits, rightHand.transform.position);
+            //GameObject hitObject = NearestHitObject(hits, rightHand.transform.position);
+            foreach (RaycastHit hit in hits)
+            {
+                GameObject hitObject = hit.collider.gameObject;
+                    if (tutorialController.IsActive())
+                        HandleTutorialInput(hitObject, rHandTriggered);
 
-            if (tutorialController.IsActive())
-                HandleTutorialInput(hitObject, rHandTriggered);
-
-            if (ShouldChangeMode(hitObject, rHandTriggered))
-                ChangeMode();
-            else if (mode.Equals("EDIT"))
-                HandleEditModeInputs(hitObject, rIndexTriggered, rHandTriggered);
-            else if (mode.Equals("CREATE"))
-                HandleCreateModeInputs(hitObject, rIndexTriggered, rHandTriggered);
-            else if (mode.Equals("PLAY"))
-                HandlePlayModeInputs(hitObject, rIndexTriggered, rHandTriggered);
+                    if (ShouldChangeMode(hitObject, rHandTriggered))
+                        ChangeMode();
+                    else if (mode.Equals("EDIT"))
+                        HandleEditModeInputs(hitObject, rIndexTriggered, rHandTriggered);
+                    else if (mode.Equals("CREATE"))
+                        HandleCreateModeInputs(hitObject, rIndexTriggered, rHandTriggered);
+                    else if (mode.Equals("PLAY"))
+                        HandlePlayModeInputs(hitObject, rIndexTriggered, rHandTriggered);
+            }
         }
 
         else if (mode.Equals("PLAY"))

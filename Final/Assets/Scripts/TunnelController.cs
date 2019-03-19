@@ -68,7 +68,7 @@ public class TunnelController : MonoBehaviour
     public void WriteToFile ()
     {
         // Write to disk
-        string path = Application.dataPath.ToString() + @"/Saved/Save.txt";
+        string path = Application.dataPath.ToString() + @"/Saved/" + fileName;
         StreamWriter writer = new StreamWriter(path, false);
         writer.AutoFlush = true;
 
