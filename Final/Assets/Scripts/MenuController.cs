@@ -23,9 +23,11 @@ public class MenuController : MonoBehaviour
     public Button resetButton;
     public Button saveButton;
     public Button loadButton;
+    public Button tutorialButton;
 
     private MovementController movementController;
     private ModeController modeController;
+    private TutorialController tutorialController;
     private bool isSet;
     private bool isExpanded;
     private bool isHighlightTimerOn;
@@ -36,6 +38,7 @@ public class MenuController : MonoBehaviour
     {
         movementController = GameObject.Find("OVRPlayerController").GetComponent<MovementController>();
         modeController = GameObject.Find("LogicController").GetComponent<ModeController>();
+        tutorialController = GameObject.Find("LogicController").GetComponent<TutorialController>();
         isSet = false;
         isExpanded = false;
         isHighlightTimerOn = false;
@@ -238,10 +241,22 @@ public class MenuController : MonoBehaviour
         ExpandOrCollapseDropdown();
     }
 
+    public void TurnOnOffTutorial()
+    {
+        ColorBlock cb = tutorialButton.colors;
+        cb.normalColor = tutorialController.IsActive() ? Color.white : Color.green;
+        tutorialButton.colors = cb;
+
+        tutorialController.TurnOffOn();
+    }
+
     public void Play()
     {
         if (modeController.IsFirstPlay())
+        {
+            modeController.SetFirstPlay();
             movementController.ResetPosition();
+        }
 
         menu.SetActive(false);
         movementController.SetIsPlaying(true);

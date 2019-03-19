@@ -25,13 +25,9 @@ public class MovementController : MonoBehaviour
         if (modeController.GetMode().Equals("EDIT"))
         {
             float moveSpeed = OVRInput.Get(OVRInput.RawAxis1D.LIndexTrigger);
-            //Debug.Log(moveSpeed.ToString());
             Vector3 movementVector = transform.forward * moveSpeed * MOVEMENT_SCALE;
             movementVector.y = 0.0f;
             GetComponent<CharacterController>().Move(movementVector);
-            //transform.position += new Vector3(0.0f, 0.0f, 0.1f);
-            //Debug.Log(movementVector.magnitude.ToString());
-            //Debug.Log(GetComponent<CharacterController>().velocity.ToString());
         }
         else if (modeController.GetMode().Equals("PLAY"))
         {
@@ -42,7 +38,9 @@ public class MovementController : MonoBehaviour
     
     public void ResetPosition()
     {
+        GetComponent<CharacterController>().enabled = false;
         transform.position = startPosition;
+        GetComponent<CharacterController>().enabled = true;
     }
 
     public void SetIsPlaying(bool newIsPlaying)
