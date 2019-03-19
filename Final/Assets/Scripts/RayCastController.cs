@@ -14,9 +14,12 @@ public class RayCastController : MonoBehaviour
     private MovementController movementController;
     private MusicBoxController musicBoxController;
     private TunnelController tunnelController;
+    private TutorialController tutorialController;
     private Vector3 forward;
     private Vector3 up;
     private bool canPaint;
+    private bool tutorialOn;
+    private bool turnOnOnce;
 
     private Note currNote; // the note we are currently "painting"
 
@@ -51,8 +54,11 @@ public class RayCastController : MonoBehaviour
         movementController = GameObject.Find("OVRPlayerController").GetComponent<MovementController>();
         musicBoxController = MusicBox.GetComponent<MusicBoxController>();
         tunnelController = GameObject.Find("Tunnel").GetComponent<TunnelController>();
+        tutorialController = GameObject.Find("LogicController").GetComponent<TutorialController>();
         currNote = musicBoxController.GetNote("N♮N");
         canPaint = false;
+        tutorialOn = false;
+        turnOnOnce = false;
     }
 
     // Update is called once per frame
@@ -89,6 +95,10 @@ public class RayCastController : MonoBehaviour
             {
                 menuController.StartTimedButtonHighlight("LOAD");
                 tunnelController.LoadFromFile();
+            }
+            else if (hitObject.name == "TutorialButton")
+            {
+                menuController.TurnOnOffTutorial();
             }
         }
     }
@@ -184,6 +194,11 @@ public class RayCastController : MonoBehaviour
 
     private void HandlePlayModePauseInput()
     {
+        if (tutorialOn && turnOnOnce)
+        {
+            tutorialController.TurnOffOn();
+            turnOnOnce = false;
+        }
         menuController.Pause();
         transform.GetChild(0).gameObject.SetActive(true);
     }
@@ -194,12 +209,30 @@ public class RayCastController : MonoBehaviour
 
         else if (hitObject.name == "PlayButton")
         {
+            tutorialOn = tutorialController.IsActive();
+            if (tutorialOn)
+            {
+                tutorialController.TurnOffOn();
+                turnOnOnce = true;
+            }
+
             menuController.Play();
             transform.GetChild(0).gameObject.SetActive(false);
         }
         else if (hitObject.name == "ResetButton")
         {
             menuController.Reset();
+        }
+    }
+
+    private void HandleTutorialInput(GameObject hitObject, bool rHandTriggered)
+    {
+        if (rHandTriggered)
+        {
+            if (hitObject.name == "TutorialPrevButton")
+                tutorialController.Prev();
+            else if (hitObject.name == "TutorialNextButton")
+                tutorialController.Next();
         }
     }
 
@@ -216,11 +249,14 @@ public class RayCastController : MonoBehaviour
 
         Ray ray = new Ray(rightHand.transform.position, forward);
         Debug.DrawRay(rightHand.transform.position, forward, Color.green);
-        RaycastHit hit;
+        RaycastHit[] hits = Physics.RaycastAll(ray);
 
-        if (Physics.Raycast(ray, out hit))
+        if (hits.Length > 0)
         {
-            GameObject hitObject = hit.collider.gameObject;
+            GameObject hitObject = NearestHitObject(hits, rightHand.transform.position);
+
+            if (tutorialController.IsActive())
+                HandleTutorialInput(hitObject, rHandTriggered);
 
             if (ShouldChangeMode(hitObject, rHandTriggered))
                 ChangeMode();
@@ -234,5 +270,22 @@ public class RayCastController : MonoBehaviour
 
         else if (mode.Equals("PLAY"))
             HandlePlayModeInputs(null, rIndexTriggered, rHandTriggered);
+    }
+
+    private GameObject NearestHitObject(RaycastHit[] hits, Vector3 startPos)
+    {
+        float minDistance = float.MaxValue;
+        GameObject nearestObject = hits[0].collider.gameObject;
+
+        foreach (RaycastHit hit in hits)
+        {
+            if ((hit.collider.gameObject.transform.position - startPos).magnitude < minDistance)
+            {
+                nearestObject = hit.collider.gameObject;
+                minDistance = (hit.collider.gameObject.transform.position - startPos).magnitude;
+            }
+        }
+
+        return nearestObject;
     }
 }
