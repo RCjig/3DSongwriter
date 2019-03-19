@@ -3880,7 +3880,7 @@ GameObject:
   - component: {fileID: 665378213}
   - component: {fileID: 665378215}
   - component: {fileID: 665378214}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: MenuPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8824,7 +8824,7 @@ GameObject:
   - component: {fileID: 1726166334}
   - component: {fileID: 1726166336}
   - component: {fileID: 1726166335}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: TutorialPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
