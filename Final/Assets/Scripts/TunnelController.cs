@@ -8,7 +8,7 @@ public class TunnelController : MonoBehaviour
     readonly float SPACING = 3.0f;
 
     public GameObject NoteGate;
-    public TextAsset loadFile;
+    public string fileName;
     public GameObject MusicBox;
 
     private bool hasBeenCreated;
@@ -44,15 +44,17 @@ public class TunnelController : MonoBehaviour
     {
         if (hasBeenCreated) return;
 
-        //Read the text from directly from the test.txt file
-        string[] lines = loadFile.text.Split('\n');
-        CreateTunnel(lines.Length - 1);
-        MusicBoxController musicBoxController = MusicBox.GetComponent<MusicBoxController>();
-        for (int i = 0; i < lines.Length - 1; i++)
+        string filePath = Application.dataPath.ToString() + @"/Saved/" + fileName;
+        StreamReader reader = new StreamReader(filePath);
+        int numGates = int.Parse(reader.ReadLine());
+        CreateTunnel(numGates);
+        for (int i = 0; i < numGates; i++)
         {
             GameObject currGate = noteGates[i];
             NoteBlockBehavior[] currNoteBlocks = currGate.GetComponentsInChildren<NoteBlockBehavior>();
-            string[] notes = lines[i].Split(' ');
+            MusicBoxController musicBoxController = MusicBox.GetComponent<MusicBoxController>();
+
+            string[] notes = reader.ReadLine().Split(' ');
             for (int j = 0; j < notes.Length && j < currNoteBlocks.Length; j++)
             {
                 string currName = currNoteBlocks[j].name;
@@ -70,23 +72,10 @@ public class TunnelController : MonoBehaviour
         StreamWriter writer = new StreamWriter(path, false);
         writer.AutoFlush = true;
 
+        writer.WriteLine(noteGates.Length + "");
+
         foreach (GameObject gate in noteGates)
             writer.WriteLine(GateToString(gate));
-            //serializedData = serializedData + GateToString(gate);
-
-        // Write to disk
-        //StreamWriter writer = new StreamWriter(path, false);
-       // writer.Write(serializedData);
-
-        /* Read
-        StreamReader reader = new StreamReader("MyPath.txt");
-        string lineA = reader.ReadLine();
-        string[] splitA = lineA.Split(',');
-        scoreA = int.Parse(splitA[1]);
-
-        string lineB = reader.ReadLine();
-        string[] splitB = lineB.Split(',');
-        scoreB = int.Parse(splitB[1]);*/
     }
 
     public void CreateTunnel(int gateCount)
