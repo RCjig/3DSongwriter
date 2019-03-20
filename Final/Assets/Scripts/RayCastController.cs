@@ -249,46 +249,29 @@ public class RayCastController : MonoBehaviour
 
         Ray ray = new Ray(rightHand.transform.position, forward);
         Debug.DrawRay(rightHand.transform.position, forward, Color.green);
-        RaycastHit[] hits = Physics.RaycastAll(ray);
+        RaycastHit hit;
 
-        if (hits.Length > 0)
+
+        // Physics.Raycast DOES return the closest object; it was just colliding with the cylinder LOL
+        // (Note that RaycastAll does not return the objects in order of distance, so when we changed to look
+        // at all the objects, we needed to find the closest object, but sometimes that was still the cylinder)
+        if (Physics.Raycast(ray, out hit))
         {
-            //GameObject hitObject = NearestHitObject(hits, rightHand.transform.position);
-            foreach (RaycastHit hit in hits)
-            {
-                GameObject hitObject = hit.collider.gameObject;
-                    if (tutorialController.IsActive())
-                        HandleTutorialInput(hitObject, rHandTriggered);
+            GameObject hitObject = hit.collider.gameObject;
+            if (tutorialController.IsActive())
+                HandleTutorialInput(hitObject, rHandTriggered);
 
-                    if (ShouldChangeMode(hitObject, rHandTriggered))
-                        ChangeMode();
-                    else if (mode.Equals("EDIT"))
-                        HandleEditModeInputs(hitObject, rIndexTriggered, rHandTriggered);
-                    else if (mode.Equals("CREATE"))
-                        HandleCreateModeInputs(hitObject, rIndexTriggered, rHandTriggered);
-                    else if (mode.Equals("PLAY"))
-                        HandlePlayModeInputs(hitObject, rIndexTriggered, rHandTriggered);
-            }
+            if (ShouldChangeMode(hitObject, rHandTriggered))
+                ChangeMode();
+            else if (mode.Equals("EDIT"))
+                HandleEditModeInputs(hitObject, rIndexTriggered, rHandTriggered);
+            else if (mode.Equals("CREATE"))
+                HandleCreateModeInputs(hitObject, rIndexTriggered, rHandTriggered);
+            else if (mode.Equals("PLAY"))
+                HandlePlayModeInputs(hitObject, rIndexTriggered, rHandTriggered);
         }
 
         else if (mode.Equals("PLAY"))
             HandlePlayModeInputs(null, rIndexTriggered, rHandTriggered);
-    }
-
-    private GameObject NearestHitObject(RaycastHit[] hits, Vector3 startPos)
-    {
-        float minDistance = float.MaxValue;
-        GameObject nearestObject = hits[0].collider.gameObject;
-
-        foreach (RaycastHit hit in hits)
-        {
-            if ((hit.collider.gameObject.transform.position - startPos).magnitude < minDistance)
-            {
-                nearestObject = hit.collider.gameObject;
-                minDistance = (hit.collider.gameObject.transform.position - startPos).magnitude;
-            }
-        }
-
-        return nearestObject;
     }
 }
