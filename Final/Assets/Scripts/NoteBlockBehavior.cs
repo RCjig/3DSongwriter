@@ -44,6 +44,20 @@ public class NoteBlockBehavior : MonoBehaviour
         return false;
     }
 
+    private void PlayNoteScheduled(double when)
+    {
+        Debug.Log(Time.time + " vs. " + when);
+        if (!audioSource.isPlaying)
+            audioSource.PlayScheduled(when);
+        else if (audioSource.time > 0.5)
+            audioSource.Stop();
+    }
+
+    public void PlayScheduled(double when)
+    {
+        if (HasNote()) PlayNoteScheduled(when);
+    }
+
     private void PlayNote()
     {
         if (!audioSource.isPlaying)

@@ -6,10 +6,13 @@ using OVR;
 public class NoteGateController : MonoBehaviour
 {
     readonly float TRIGGER_BUFFER = 0.25f; // idk how else to check when a player crosses a line
+    readonly int numNoteBlocks = 21;
 
     private GameObject playerController;
     private LineRenderer triggerLine;
     private bool canPlay;
+
+    private NoteBlockBehavior[] noteBlockControllers;
 
     // Start is called before the first frame update
     void Start()
@@ -17,10 +20,30 @@ public class NoteGateController : MonoBehaviour
         playerController = GameObject.Find("OVRPlayerController");
         triggerLine = this.GetComponentInChildren<LineRenderer>();
         canPlay = true;
+        InitNoteBlockControllers();
+    }
+
+    private void InitNoteBlockControllers ()
+    {
+        if (noteBlockControllers == null)
+        {
+            noteBlockControllers = new NoteBlockBehavior[numNoteBlocks];
+            int count = 0;
+
+            foreach (Transform layer in transform)
+            {
+                if (layer.tag != "GateLayer") continue;
+                foreach (Transform noteBlock in layer.transform)
+                {
+                    noteBlockControllers[count] = noteBlock.gameObject.GetComponent<NoteBlockBehavior>();
+                    count++;
+                }
+            }
+        }
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (IsLineTriggered() && canPlay) OnLineTrigger();
     }
@@ -32,13 +55,9 @@ public class NoteGateController : MonoBehaviour
 
     private void PlayGate()
     {
-        foreach (Transform layer in transform)
+        foreach (NoteBlockBehavior noteBlock in noteBlockControllers)
         {
-            if (layer.tag != "GateLayer") continue;
-            foreach (Transform noteBlock in layer.transform)
-            {
-                noteBlock.gameObject.GetComponent<NoteBlockBehavior>().Play();
-            }
+            noteBlock.Play();
         }
     }
 
