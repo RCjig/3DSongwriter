@@ -251,10 +251,6 @@ public class RayCastController : MonoBehaviour
         Debug.DrawRay(rightHand.transform.position, forward, Color.green);
         RaycastHit hit;
 
-
-        // Physics.Raycast DOES return the closest object; it was just colliding with the cylinder LOL
-        // (Note that RaycastAll does not return the objects in order of distance, so when we changed to look
-        // at all the objects, we needed to find the closest object, but sometimes that was still the cylinder)
         if (Physics.Raycast(ray, out hit))
         {
             GameObject hitObject = hit.collider.gameObject;
