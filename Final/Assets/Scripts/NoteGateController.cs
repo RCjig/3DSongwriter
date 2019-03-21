@@ -5,7 +5,7 @@ using OVR;
 
 public class NoteGateController : MonoBehaviour
 {
-    readonly float TRIGGER_BUFFER = 0.25f; // idk how else to check when a player crosses a line
+    readonly float TRIGGER_BUFFER = 0.75f; // idk how else to check when a player crosses a line
     readonly int numNoteBlocks = 21;
 
     private GameObject playerController;
