@@ -1,9 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class RayCastController : MonoBehaviour
 {
+    private readonly string OTHER_SCENE = "Tutorial";
+
     public OVRInput.Controller rightController; // right touch controller
     public GameObject MusicBox;
     public string fileName;
@@ -99,7 +102,8 @@ public class RayCastController : MonoBehaviour
             }
             else if (hitObject.name == "TutorialButton")
             {
-                menuController.TurnOnOffTutorial();
+                //menuController.TurnOnOffTutorial();
+                SceneManager.LoadScene(OTHER_SCENE);
             }
         }
     }

@@ -50,7 +50,7 @@ public class NoteBlockBehavior : MonoBehaviour
         if (!audioSource.isPlaying)
             audioSource.PlayScheduled(when);
         else if (audioSource.time > 0.5)
-            audioSource.Stop();
+            ResetNote();
     }
 
     public void PlayScheduled(double when)
@@ -58,12 +58,20 @@ public class NoteBlockBehavior : MonoBehaviour
         if (HasNote()) PlayNoteScheduled(when);
     }
 
+    private void ResetNote()
+    {
+        audioSource.Stop();
+    }
+
     private void PlayNote()
     {
         if (!audioSource.isPlaying)
             audioSource.Play();
         else if (audioSource.time > 0.5)
-            audioSource.Stop();
+        {
+            ResetNote();
+            audioSource.Play();
+        }
     }
 
     public void Play()
