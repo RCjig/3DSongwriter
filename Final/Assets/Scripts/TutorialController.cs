@@ -55,12 +55,7 @@ public class TutorialController : MonoBehaviour
 
     private void ShowButton()
     {
-        if (currIndex == 0) prevButton.gameObject.SetActive(false);
-        else if (currIndex == tutorialTexts.Length - 1) nextButton.gameObject.SetActive(false);
-        else
-        {
-            prevButton.gameObject.SetActive(true);
-            nextButton.gameObject.SetActive(true);
-        }
+        if (currIndex == 0 || currIndex == 13 || currIndex == tutorialTexts.Length - 1) nextButton.gameObject.SetActive(true);
+        else nextButton.gameObject.SetActive(false);
     }
 }

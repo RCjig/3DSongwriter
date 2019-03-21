@@ -6,6 +6,7 @@ public class RayCastController : MonoBehaviour
 {
     public OVRInput.Controller rightController; // right touch controller
     public GameObject MusicBox;
+    public string fileName;
 
     private OvrAvatar avatar; // player avatar
     private GameObject rightHand; // for ray cast position
@@ -94,7 +95,7 @@ public class RayCastController : MonoBehaviour
             else if (hitObject.name == "LoadButton")
             {
                 menuController.StartTimedButtonHighlight("LOAD");
-                tunnelController.LoadFromFile();
+                tunnelController.LoadFromFile(fileName);
             }
             else if (hitObject.name == "TutorialButton")
             {
@@ -168,7 +169,7 @@ public class RayCastController : MonoBehaviour
             else if (hitObject.name == "SaveButton")
             {
                 menuController.StartTimedButtonHighlight("SAVE");
-                tunnelController.WriteToFile();
+                tunnelController.WriteToFile(fileName);
             }
 
             else if (hitObject.name == "SetButton")
@@ -254,6 +255,7 @@ public class RayCastController : MonoBehaviour
         if (Physics.Raycast(ray, out hit))
         {
             GameObject hitObject = hit.collider.gameObject;
+            Debug.Log(hitObject.name);
             if (tutorialController.IsActive())
                 HandleTutorialInput(hitObject, rHandTriggered);
 

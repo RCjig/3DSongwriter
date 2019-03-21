@@ -8,7 +8,6 @@ public class TunnelController : MonoBehaviour
     readonly float SPACING = 3.0f;
 
     public GameObject NoteGate;
-    public string fileName;
     public GameObject MusicBox;
 
     private bool hasBeenCreated;
@@ -40,7 +39,7 @@ public class TunnelController : MonoBehaviour
 
 
     // this does not work yet and we need to write the number of lines if we can't make the newline character work
-    public void LoadFromFile ()
+    public void LoadFromFile (string fileName)
     {
         if (hasBeenCreated) return;
 
@@ -63,9 +62,11 @@ public class TunnelController : MonoBehaviour
                 currNoteBlocks[j].AssignNote(musicBoxController.GetNote(noteName));
             }
         }
+
+        reader.Close();
     }
 
-    public void WriteToFile ()
+    public void WriteToFile (string fileName)
     {
         // Write to disk
         string path = Application.dataPath.ToString() + @"/Saved/" + fileName;
@@ -76,6 +77,8 @@ public class TunnelController : MonoBehaviour
 
         foreach (GameObject gate in noteGates)
             writer.WriteLine(GateToString(gate));
+
+        writer.Close();
     }
 
     public void CreateTunnel(int gateCount)

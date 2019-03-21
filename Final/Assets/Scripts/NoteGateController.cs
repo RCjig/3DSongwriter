@@ -76,7 +76,7 @@ public class NoteGateController : MonoBehaviour
         PlayGate();
     }
 
-    private bool IsInLine()
+    public bool IsInLine()
     {
         return Mathf.Abs(playerController.transform.position.z - triggerLine.transform.position.z) < TRIGGER_BUFFER;
     }

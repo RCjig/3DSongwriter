@@ -18,8 +18,15 @@ public class MusicBoxController : MonoBehaviour
 
     private readonly int numBaseNotes = 12;
 
+    private bool initialized = false;
+
     // Start is called before the first frame update
     void Start()
+    {
+        InitVars();
+    }
+
+    private void InitVars()
     {
         if ((noteSounds.Length <= 0) || !(noteSounds.Length % numBaseNotes == 0))
         {
@@ -37,6 +44,7 @@ public class MusicBoxController : MonoBehaviour
         }
         // adding the empty note to the array (no note modifier and no octave number)
         notes[noteSounds.Length] = new Note(null, "N" + natural + "N", sourceMaterial);
+        initialized = true;
     }
 
     // Update is called once per frame
@@ -72,12 +80,19 @@ public class MusicBoxController : MonoBehaviour
 
     public Note GetNote(string lookingFor)
     {
-        for (int i = 0; i < notes.Length; i++)
+        if (!initialized) InitVars();
+
+        if (initialized)
         {
-            string musicBoxNote = notes[i].getName().Trim();
-            if (SameNote(musicBoxNote, lookingFor))
-                return notes[i];
+
+            for (int i = 0; i < notes.Length; i++)
+            {
+                string musicBoxNote = notes[i].getName().Trim();
+                if (SameNote(musicBoxNote, lookingFor))
+                    return notes[i];
+            }
         }
+
         // return the default note
         return notes[notes.Length - 1];
     }
