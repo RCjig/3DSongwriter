@@ -131,8 +131,18 @@ public class TeacherController : MonoBehaviour
                 menuController.Reset(); // reset position after playing so user can see tunnel again
         }
 
+        else if (currStep == 16)
+        {
+            menuController.Hide();
+        }
+
         currStep++;
         tutorialController.Next();
+    }
+
+    private void SwitchScenes()
+    {
+        SceneManager.LoadScene(OTHER_SCENE);
     }
 
     private void Step0 (GameObject hitObject)
@@ -145,7 +155,7 @@ public class TeacherController : MonoBehaviour
         if (hitObject.name.Equals("TutorialNextButton"))
         {
             if (currStep == FINAL_STEP)
-                SceneManager.LoadScene(OTHER_SCENE);
+                SwitchScenes();
             else
                 Proceed();
         }
@@ -419,6 +429,9 @@ public class TeacherController : MonoBehaviour
 
     private void ProcessRaycast(GameObject hitObject, bool rIndexTriggered, bool rHandTriggered)
     {
+        if (rHandTriggered && hitObject.name.Equals("TutorialExitButton"))
+            SwitchScenes();
+
         // handle edit and play mode inputs as per usual: pass in rIndexTriggered and rHandTriggered
         if (currStep == 11) Step11(hitObject, rIndexTriggered, rHandTriggered);
         else if (currStep == 13) Step13(hitObject, rIndexTriggered, rHandTriggered);

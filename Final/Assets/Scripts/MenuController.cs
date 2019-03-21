@@ -274,6 +274,11 @@ public class MenuController : MonoBehaviour
         movementController.SetIsPlaying(false);
     }
 
+    public void Hide()
+    {
+        menu.SetActive(false);
+    }
+
     private bool IsNoteSet()
     {
         bool isNoteSet = false;
